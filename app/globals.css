@@ -5,19 +5,7 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    FONTS — Clash Display + Satoshi
    ═══════════════════════════════════════════════════════════════════════════ */
-@font-face {
-  font-family: 'Clash Display';
-  src: url('https://fonts.cdnfonts.com/s/88019/ClashDisplay-Variable.woff2') format('woff2');
-  font-weight: 200 700;
-  font-display: swap;
-}
 
-@font-face {
-  font-family: 'Satoshi';
-  src: url('https://fonts.cdnfonts.com/s/85546/Satoshi-Variable.woff2') format('woff2');
-  font-weight: 300 900;
-  font-display: swap;
-}
 
 :root {
   --font-clash: 'Clash Display', system-ui, sans-serif;
