@@ -5,6 +5,8 @@ import {
   Loader2, Lock, LogOut, Search, Download, Trash2, Users,
   UserCheck, Briefcase, TrendingUp, MapPin, Calendar, Mail, AlertCircle
 } from 'lucide-react';
+import { db } from '@/lib/firebase';
+import { collection, getDocs, orderBy, query, deleteDoc, doc } from 'firebase/firestore';
 
 // ── Types ───────────────────────────────────────────────────────────────────
 interface WaitlistEntry {
@@ -34,10 +36,8 @@ export default function AdminPage() {
   const [authed, setAuthed] = useState<boolean | null>(null);
 
   useEffect(() => {
-    // Try to fetch waitlist — if it returns 401, we need to log in
-    fetch('/api/admin/waitlist')
-      .then((r) => setAuthed(r.status !== 401))
-      .catch(() => setAuthed(false));
+    const isAuthed = localStorage.getItem('admin_authed');
+    setAuthed(isAuthed === 'true');
   }, []);
 
   if (authed === null) {
@@ -48,8 +48,8 @@ export default function AdminPage() {
     );
   }
 
-  if (!authed) return <LoginGate onSuccess={() => setAuthed(true)} />;
-  return <Dashboard onLogout={() => setAuthed(false)} />;
+  if (!authed) return <LoginGate onSuccess={() => { localStorage.setItem('admin_authed', 'true'); setAuthed(true); }} />;
+  return <Dashboard onLogout={() => { localStorage.removeItem('admin_authed'); setAuthed(false); }} />;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -66,21 +66,14 @@ function LoginGate({ onSuccess }: { onSuccess: () => void }) {
     setError('');
 
     try {
-      const res = await fetch('/api/admin/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-      });
-      const data = await res.json();
-
-      if (data.success) {
+      if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
         onSuccess();
       } else {
-        setError(data.message || 'Login failed');
-        setLoading(false);
+        setError('Login failed');
       }
     } catch {
       setError('Network error');
+    } finally {
       setLoading(false);
     }
   }
@@ -149,12 +142,44 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
   async function fetchData() {
     setLoading(true);
     try {
-      const res = await fetch('/api/admin/waitlist');
-      const data = await res.json();
-      if (data.success) {
-        setEntries(data.entries);
-        setStats(data.stats);
-      }
+      const snap = await getDocs(query(collection(db, 'waitlist'), orderBy('position', 'desc')));
+      const newEntries = snap.docs.map((d) => {
+        const data = d.data();
+        return {
+          id: d.id,
+          email: data.email || '',
+          name: data.name || '',
+          role: data.role || 'customer',
+          city: data.city || '',
+          phone: data.phone || '',
+          services: data.services || '',
+          position: data.position || 0,
+          createdAt: data.createdAt?.toDate?.()?.toISOString() || null,
+        };
+      });
+
+      const total = newEntries.length;
+      const customers = newEntries.filter((e) => e.role === 'customer').length;
+      const providers = newEntries.filter((e) => e.role === 'provider').length;
+
+      const cityMap: Record<string, number> = {};
+      newEntries.forEach((e) => {
+        const city = (e.city || 'Unknown').trim() || 'Unknown';
+        cityMap[city] = (cityMap[city] || 0) + 1;
+      });
+      const topCities = Object.entries(cityMap)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5)
+        .map(([city, count]) => ({ city, count }));
+
+      const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+      const last7Days = newEntries.filter((e) => {
+        if (!e.createdAt) return false;
+        return new Date(e.createdAt).getTime() > sevenDaysAgo;
+      }).length;
+
+      setEntries(newEntries);
+      setStats({ total, customers, providers, last7Days, topCities });
     } catch (err) {
       console.error('Fetch error:', err);
     } finally {
@@ -167,21 +192,14 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
   }, []);
 
   async function handleLogout() {
-    await fetch('/api/admin/login', { method: 'DELETE' });
     onLogout();
   }
 
   async function handleDelete(id: string, email: string) {
     if (!confirm(`Delete ${email} from waitlist? This cannot be undone.`)) return;
     try {
-      const res = await fetch('/api/admin/waitlist', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
-      });
-      if (res.ok) {
-        fetchData();
-      }
+      await deleteDoc(doc(db, 'waitlist', id));
+      fetchData();
     } catch (err) {
       console.error('Delete error:', err);
     }

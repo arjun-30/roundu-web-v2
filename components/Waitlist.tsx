@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Check, Loader2, AlertCircle } from 'lucide-react';
+import { db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function Waitlist() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -34,24 +36,31 @@ export default function Waitlist() {
     setMessage('');
 
     try {
-      const res = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, name, role, city, phone, services }),
-      });
-      const data = await res.json();
-
-      if (data.success) {
-        setStatus('success');
-        setMessage(data.message);
-        setPosition(data.position);
-      } else {
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         setStatus('error');
-        setMessage(data.message);
+        setMessage('Please enter a valid email.');
+        return;
       }
-    } catch {
+
+      await addDoc(collection(db, 'waitlist'), {
+        email: email.toLowerCase(),
+        name: name || '',
+        role: role || 'customer',
+        city: city || '',
+        phone: phone || '',
+        services: services || '',
+        position: Date.now(), // Fallback value since we aren't querying the collection size
+        createdAt: serverTimestamp(),
+        userAgent: window.navigator.userAgent || '',
+      });
+
+      setStatus('success');
+      setMessage("You're in! We'll notify you when RoundU launches.");
+      setPosition(null); // Optional: can be removed or hidden since we can't fetch position
+    } catch (error: any) {
+      console.error('Waitlist error:', error);
       setStatus('error');
-      setMessage('Network error. Please try again.');
+      setMessage('Something went wrong. Please try again.');
     }
   }
 
