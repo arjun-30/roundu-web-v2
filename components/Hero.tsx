@@ -91,7 +91,7 @@ export default function Hero() {
               className="mt-14 flex flex-wrap gap-10"
             >
               {[
-                { value: '100+', label: 'Services' },
+                { value: '5+', label: 'Services' },
                 { value: '<5 min', label: 'Response time' },
                 { value: '24/7', label: 'Availability' },
               ].map((stat, i) => (

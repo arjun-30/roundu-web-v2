@@ -21,7 +21,7 @@ export default function Marquee() {
 
       <div className="mb-10 text-center relative z-10">
         <p className="font-mono text-xs tracking-[0.3em] text-amber-500 uppercase">
-          [ 100+ services · one app · zero hassle ]
+          [ 5+ services · one app · zero hassle ]
         </p>
       </div>
 

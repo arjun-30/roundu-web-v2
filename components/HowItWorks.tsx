@@ -8,7 +8,7 @@ const steps = [
   {
     icon: Search,
     title: 'Find what you need',
-    description: 'Browse 100+ services. Describe your problem. Add photos if needed. Set it for now or schedule later.',
+    description: 'Browse 5+ services. Describe your problem. Add photos if needed. Set it for now or schedule later.',
   },
   {
     icon: UserCheck,

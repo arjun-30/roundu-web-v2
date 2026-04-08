@@ -24,6 +24,8 @@ export async function GET(req: NextRequest) {
         name: data.name || '',
         role: data.role || 'customer',
         city: data.city || '',
+        phone: data.phone || '',
+        services: data.services || '',
         position: data.position || 0,
         createdAt: data.createdAt?.toDate?.()?.toISOString() || null,
       };

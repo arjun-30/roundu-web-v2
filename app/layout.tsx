@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'RoundU — The Circle of Convenience | Home Services On Demand',
-  description: 'Book verified home service providers in under 5 minutes. Electricians, plumbers, cleaners, mechanics and 100+ more services at your doorstep. Join the waitlist.',
+  description: 'Book verified home service providers in under 5 minutes. Electricians, plumbers, cleaners, mechanics and 5+ more services at your doorstep. Join the waitlist.',
   keywords: ['home services', 'on demand', 'electrician', 'plumber', 'india', 'handyman', 'booking app'],
   authors: [{ name: 'RoundU' }],
   metadataBase: new URL('https://roundu.in'),

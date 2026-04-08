@@ -13,6 +13,8 @@ interface WaitlistEntry {
   name: string;
   role: string;
   city: string;
+  phone?: string;
+  services?: string;
   position: number;
   createdAt: string | null;
 }
@@ -186,13 +188,15 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
   }
 
   function exportCSV() {
-    const headers = ['Position', 'Email', 'Name', 'Role', 'City', 'Joined At'];
+    const headers = ['Position', 'Email', 'Name', 'Phone', 'Role', 'City', 'Services', 'Joined At'];
     const rows = filtered.map((e) => [
       e.position,
       e.email,
       e.name,
+      e.phone || '',
       e.role,
       e.city,
+      e.services || '',
       e.createdAt ? new Date(e.createdAt).toLocaleString() : '',
     ]);
     const csv = [headers, ...rows]
@@ -370,8 +374,10 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                       <Th>#</Th>
                       <Th>Email</Th>
                       <Th>Name</Th>
+                      <Th>Phone</Th>
                       <Th>Role</Th>
                       <Th>City</Th>
+                      <Th>Services</Th>
                       <Th>Joined</Th>
                       <Th>Actions</Th>
                     </tr>
@@ -404,6 +410,9 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                             <span className="text-bg/80">{entry.name || '—'}</span>
                           </Td>
                           <Td>
+                            <span className="text-bg/80 whitespace-nowrap">{entry.phone || '—'}</span>
+                          </Td>
+                          <Td>
                             <span
                               className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                                 entry.role === 'provider'
@@ -416,6 +425,11 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                           </Td>
                           <Td>
                             <span className="text-bg/70">{entry.city || '—'}</span>
+                          </Td>
+                          <Td>
+                            <div className="max-w-[150px] truncate" title={entry.services || ''}>
+                              <span className="text-bg/70">{entry.services || '—'}</span>
+                            </div>
                           </Td>
                           <Td>
                             <div className="flex items-center gap-1.5 text-xs text-bg/60">
