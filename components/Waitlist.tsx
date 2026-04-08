@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Check, Loader2, AlertCircle } from 'lucide-react';
 import { db } from '@/lib/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, query, where, getDocs, serverTimestamp } from 'firebase/firestore';
 
 export default function Waitlist() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -42,6 +42,16 @@ export default function Waitlist() {
         return;
       }
 
+      const existing = await getDocs(query(collection(db, 'waitlist'), where('email', '==', email.toLowerCase())));
+      if (!existing.empty) {
+        setStatus('error');
+        setMessage("You're already on the waitlist!");
+        return;
+      }
+
+      const allDocs = await getDocs(collection(db, 'waitlist'));
+      const newPos = allDocs.size + 101;
+
       await addDoc(collection(db, 'waitlist'), {
         email: email.toLowerCase(),
         name: name || '',
@@ -49,14 +59,14 @@ export default function Waitlist() {
         city: city || '',
         phone: phone || '',
         services: services || '',
-        position: Date.now(), // Fallback value since we aren't querying the collection size
+        position: newPos,
         createdAt: serverTimestamp(),
         userAgent: window.navigator.userAgent || '',
       });
 
       setStatus('success');
       setMessage("You're in! We'll notify you when RoundU launches.");
-      setPosition(null); // Optional: can be removed or hidden since we can't fetch position
+      setPosition(newPos);
     } catch (error: any) {
       console.error('Waitlist error:', error);
       setStatus('error');
