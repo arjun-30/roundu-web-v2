@@ -156,7 +156,7 @@ export default function Waitlist() {
                       }}
                       className={`py-3 px-4 rounded-xl font-bold transition-all ${
                         role === r
-                          ? 'btn-primary text-ink glow-amber'
+                          ? 'btn-orange text-ink glow-amber'
                           : 'glass text-bg/60 hover:bg-amber-500/5 hover:text-bg'
                       } ${r === 'provider' ? 'font-display' : ''}`}
                     >

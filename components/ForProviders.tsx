@@ -44,8 +44,7 @@ export default function ForProviders() {
               className="font-display text-display font-semibold text-bg"
             >
               Your skills <br />
-              <span className="italic text-gradient-amber glow-text-amber">deserve more</span> <br />
-              than word of mouth.
+              <span className="italic text-orange glow-text-orange">deserve more than word of mouth.</span>
             </motion.h2>
 
             <motion.p

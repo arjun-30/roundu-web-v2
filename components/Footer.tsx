@@ -49,7 +49,7 @@ export default function Footer() {
             </div>
 
             <p className="text-bg/55 leading-relaxed mb-8 max-w-sm">
-              The circle of convenience. Home services in a heartbeat.
+              The circle of convenience. Home services <span className="text-orange font-medium">in a heartbeat.</span>
               Book verified providers in under 15 minutes.
             </p>
 

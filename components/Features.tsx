@@ -80,7 +80,7 @@ export default function Features() {
           >
             Not just an app.
             <br />
-            <span className="text-gradient-amber italic">A whole new way</span> to run your home.
+            <span className="text-orange italic glow-text-orange">A whole new way to run your home.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 30 }}

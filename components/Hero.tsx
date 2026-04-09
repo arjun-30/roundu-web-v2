@@ -68,7 +68,7 @@ export default function Hero() {
             >
               Home services
               <br />
-              <span className="text-gradient-amber italic glow-text-amber">in a heartbeat.</span>
+              <span className="text-orange italic">in a heartbeat.</span>
             </motion.h1>
 
             {/* Subhead */}
@@ -87,7 +87,7 @@ export default function Hero() {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -20, opacity: 0 }}
                     transition={{ duration: 0.5, ease: 'easeOut' }}
-                    className="font-display font-bold italic text-gradient-amber glow-text-amber"
+                    className="font-serif font-bold italic text-orange glow-text-orange"
                   >
                     {services[index]}
                   </motion.span>

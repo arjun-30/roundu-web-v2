@@ -126,7 +126,7 @@ export default function TermsPage() {
             <h2>12. Contact Us</h2>
             <p>
                 For questions about these Terms, contact us at{' '}
-                <a href="mailto:hello@roundu.in">hello@roundu.in</a>.
+                <a href="mailto:admin@roundu.in">admin@roundu.in</a>.
             </p>
         </LegalPage>
     );
