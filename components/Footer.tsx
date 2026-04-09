@@ -4,7 +4,7 @@ import { Instagram, Linkedin, Twitter, Facebook, Youtube, Mail, MapPin } from 'l
 
 const socials = [
   { icon: Instagram, href: 'https://instagram.com/roundu.in', label: 'Instagram' },
-  { icon: Linkedin, href: 'https://linkedin.com/company/roundu', label: 'LinkedIn' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/roundu-in-4b4140402/?skipRedirect=true', label: 'LinkedIn' },
   { icon: Twitter, href: 'https://twitter.com/roundu_in', label: 'Twitter' },
   { icon: Facebook, href: 'https://facebook.com/roundu.in', label: 'Facebook' },
   { icon: Youtube, href: 'https://youtube.com/@roundu', label: 'YouTube' },

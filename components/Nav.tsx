@@ -14,9 +14,9 @@ export default function Nav() {
   return (
     <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? 'py-3' : 'py-6'}`}>
       <div className="container mx-auto px-6 lg:px-12">
-        <div className={`flex items-center justify-between transition-all duration-500 ${
-          scrolled ? 'glass-dark rounded-full px-6 py-3 glow-amber' : ''
-        }`}>
+        <div className={`flex items-center justify-between transition-all duration-700 group/nav ${
+          scrolled ? 'glass-dark rounded-full px-6 py-3 glow-amber border border-white/5' : ''
+        } hover:bg-white/[0.03] hover:backdrop-blur-3xl hover:border-white/20 hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]`}>
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center font-display font-bold text-ink text-lg group-hover:scale-110 transition-transform">

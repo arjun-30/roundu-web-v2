@@ -36,9 +36,24 @@ export default function Waitlist() {
     setMessage('');
 
     try {
+      if (!name.trim()) {
+        setStatus('error');
+        setMessage('Please enter your name.');
+        return;
+      }
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         setStatus('error');
         setMessage('Please enter a valid email.');
+        return;
+      }
+      if (!phone.trim() || !/^\d{10}$/.test(phone.replace(/\s+/g, ''))) {
+        setStatus('error');
+        setMessage('Please enter a valid 10-digit phone number.');
+        return;
+      }
+      if (!city.trim()) {
+        setStatus('error');
+        setMessage('Please enter your city.');
         return;
       }
 
@@ -169,10 +184,11 @@ export default function Waitlist() {
               {/* Name */}
               <div className="mb-4">
                 <label className="block text-xs font-mono tracking-wider text-amber-500/80 uppercase mb-2">
-                  Your name
+                  Your name *
                 </label>
                 <input
                   type="text"
+                  required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your full name"
@@ -198,10 +214,11 @@ export default function Waitlist() {
               {/* Phone */}
               <div className="mb-4">
                 <label className="block text-xs font-mono tracking-wider text-amber-500/80 uppercase mb-2">
-                  Phone Number
+                  Phone Number *
                 </label>
                 <input
                   type="tel"
+                  required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="e.g. 98765 43210"
@@ -212,10 +229,11 @@ export default function Waitlist() {
               {/* City */}
               <div className="mb-6">
                 <label className="block text-xs font-mono tracking-wider text-amber-500/80 uppercase mb-2">
-                  City
+                  City *
                 </label>
                 <input
                   type="text"
+                  required
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   placeholder="Vellore, Chennai, Bengaluru..."
@@ -248,7 +266,7 @@ export default function Waitlist() {
 
               <button
                 type="submit"
-                disabled={status === 'loading' || !email}
+                disabled={status === 'loading' || !email || !name || !phone || !city}
                 className="btn-waitlist w-full py-4 rounded-xl text-ink font-bold text-base disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {status === 'loading' ? (

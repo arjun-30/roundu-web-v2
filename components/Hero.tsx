@@ -40,7 +40,7 @@ export default function Hero() {
       {/* Scan line */}
       <div className="scan-line" />
 
-      <div className="container mx-auto px-6 lg:px-12 relative z-10 py-20 mt-16">
+      <div className="container mx-auto px-6 lg:px-12 relative z-10 py-10 mt-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
           {/* LEFT — Copy */}
@@ -50,13 +50,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-amber mb-8"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full glass-amber glow-launch-amber mb-10"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
               </span>
-              <span className="text-sm font-medium text-amber-300 font-mono tracking-wide">LAUNCHING IN VELLORE & CHENNAI</span>
+              <span className="text-base font-medium text-amber-300 font-mono tracking-wide uppercase text-glow-amber">LAUNCHING SOON IN VELLORE & CHENNAI</span>
             </motion.div>
 
             {/* Headline */}
