@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Sparkles, Zap } from 'lucide-react';
+import FloatingServices from './floating';
 
 const services = [
   'housekeepers',
@@ -41,6 +42,9 @@ export default function Hero() {
 
       {/* Scan line */}
       <div className="scan-line" />
+
+      {/* Floating Service Icons */}
+      <FloatingServices />
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10 py-16 mt-12">
         <div className="grid lg:grid-cols-2 gap-12 items-center">

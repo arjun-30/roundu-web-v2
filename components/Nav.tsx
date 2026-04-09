@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -31,7 +32,7 @@ export default function Nav() {
             style={{ scaleX }}
           />
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center font-display font-bold text-ink text-lg group-hover:scale-110 transition-transform">
               <span className="relative z-10">R</span>
               <div className="absolute inset-0 rounded-xl bg-amber-500 blur-xl opacity-50 group-hover:opacity-80 transition-opacity"></div>
@@ -40,21 +41,21 @@ export default function Nav() {
               <span className="font-display text-2xl font-semibold text-bg leading-none">RoundU</span>
               <span className="text-[9px] uppercase tracking-widest text-amber-500 mt-1 opacity-80 font-mono">The circle of convenience</span>
             </div>
-          </a>
+          </Link>
 
           {/* Links */}
           <div className="hidden md:flex items-center gap-10">
-            <a href="#features" className="text-sm text-bg/70 hover:text-amber-500 transition-colors font-medium">Features</a>
-            <a href="#providers" className="text-sm text-bg/70 hover:text-amber-500 transition-colors font-medium">For providers</a>
+            <Link href="/#features" className="text-sm text-bg/70 hover:text-amber-500 transition-colors font-medium">Features</Link>
+            <Link href="/#providers" className="text-sm text-bg/70 hover:text-amber-500 transition-colors font-medium">For providers</Link>
           </div>
 
           {/* CTA */}
-          <a
-            href="#waitlist"
+          <Link
+            href="/#waitlist"
             className="btn-waitlist px-6 py-2.5 rounded-full text-ink text-sm font-bold"
           >
             <span>Join waitlist</span>
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
