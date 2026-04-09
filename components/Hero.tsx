@@ -40,7 +40,7 @@ export default function Hero() {
       {/* Scan line */}
       <div className="scan-line" />
 
-      <div className="container mx-auto px-6 lg:px-12 relative z-10 py-10 mt-6">
+      <div className="container mx-auto px-6 lg:px-12 relative z-10 py-16 mt-12">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
           {/* LEFT — Copy */}
@@ -50,7 +50,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full glass-amber glow-launch-amber mb-10"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full glass-amber glow-launch-amber mb-12 shadow-[0_0_30px_rgba(245,158,11,0.3)]"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
