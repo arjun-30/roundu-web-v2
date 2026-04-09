@@ -1,9 +1,32 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Sparkles, Zap } from 'lucide-react';
 
+const services = [
+  'electricians',
+  'plumbers',
+  'cleaners',
+  'mechanics',
+  'car washers',
+  'AC repairers',
+  'painters',
+  'carpenters',
+  'beauticians',
+  'gardeners'
+];
+
 export default function Hero() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % services.length);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden mesh-bg">
       {/* Grid overlay */}
@@ -55,8 +78,22 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="mt-8 text-lg md:text-xl text-bg/65 max-w-xl leading-relaxed"
             >
-              RoundU connects you with verified electricians, plumbers, cleaners,
-              and 100+ more service providers — at your doorstep in under 5 minutes.
+              RoundU connects you with verified{' '}
+              <span className="inline-block min-w-[140px] text-left">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={services[index]}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    className="font-display font-bold italic text-gradient-amber glow-text-amber"
+                  >
+                    {services[index]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+              , and 100+ more service providers — at your doorstep in under 15 minutes.
               Join the waitlist to be first in line.
             </motion.p>
 
@@ -69,17 +106,11 @@ export default function Hero() {
             >
               <a
                 href="#waitlist"
-                className="btn-primary group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-ink font-bold text-base"
+                className="btn-waitlist group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-ink font-bold text-base"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Join the waitlist</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
-                href="#features"
-                className="btn-ghost inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-bg font-semibold text-base"
-              >
-                <span>See how it works</span>
               </a>
             </motion.div>
 
@@ -92,7 +123,7 @@ export default function Hero() {
             >
               {[
                 { value: '5+', label: 'Services' },
-                { value: '<5 min', label: 'Response time' },
+                { value: '<15 min', label: 'Response time' },
                 { value: '24/7', label: 'Availability' },
               ].map((stat, i) => (
                 <div key={i} className="relative">
@@ -162,7 +193,7 @@ export default function Hero() {
                         </div>
                         <div>
                           <div className="text-[10px] font-semibold text-bg">Emergency service</div>
-                          <div className="text-[8px] text-amber-300">Get help in 5 min</div>
+                          <div className="text-[8px] text-amber-300">Get help in 15 min</div>
                         </div>
                       </div>
                     </div>

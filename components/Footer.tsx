@@ -11,26 +11,20 @@ const socials = [
 ];
 
 const footerLinks = {
-  product: [
-    { label: 'Features', href: '#features' },
-    { label: 'How it works', href: '#how' },
-    { label: 'For providers', href: '#providers' },
-    { label: 'Download', href: '#' },
-  ],
+
   company: [
-    { label: 'About', href: '#' },
-    { label: 'Blog', href: '#' },
-    { label: 'Careers', href: '#' },
-    { label: 'Contact', href: '#' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+    { label: 'Careers', href: 'mailto:admin@roundu.in?subject=Join%20the%20team' },
+    { label: 'Press', href: 'mailto:admin@roundu.in?subject=Press%20inquiry' },
   ],
   legal: [
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Cookie Policy', href: '#' },
-    { label: 'Refund Policy', href: '#' },
+    { label: 'Terms of Service', href: '/terms' },
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Refund Policy', href: '/refund' },
+    { label: 'Cookie Policy', href: '/privacy#cookies' },
   ],
 };
-
 export default function Footer() {
   return (
     <footer className="relative bg-navy-950 border-t border-amber-500/10 overflow-hidden">
@@ -56,7 +50,7 @@ export default function Footer() {
 
             <p className="text-bg/55 leading-relaxed mb-8 max-w-sm">
               The circle of convenience. Home services in a heartbeat.
-              Book verified providers in under 5 minutes.
+              Book verified providers in under 15 minutes.
             </p>
 
             {/* Contact */}
@@ -92,20 +86,7 @@ export default function Footer() {
           </div>
 
           {/* Link columns */}
-          <div className="lg:col-span-7 grid grid-cols-3 gap-8">
-            <div>
-              <h4 className="font-mono text-xs tracking-wider text-amber-500 uppercase mb-5">Product</h4>
-              <ul className="space-y-3">
-                {footerLinks.product.map((link, i) => (
-                  <li key={i}>
-                    <a href={link.href} className="text-bg/60 hover:text-bg hover:text-amber-500 transition-colors text-sm">
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
+          <div className="lg:col-span-7 grid grid-cols-2 gap-8">
             <div>
               <h4 className="font-mono text-xs tracking-wider text-amber-500 uppercase mb-5">Company</h4>
               <ul className="space-y-3">

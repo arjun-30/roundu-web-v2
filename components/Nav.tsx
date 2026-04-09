@@ -32,14 +32,13 @@ export default function Nav() {
           {/* Links */}
           <div className="hidden md:flex items-center gap-10">
             <a href="#features" className="text-sm text-bg/70 hover:text-amber-500 transition-colors font-medium">Features</a>
-            <a href="#how" className="text-sm text-bg/70 hover:text-amber-500 transition-colors font-medium">How it works</a>
             <a href="#providers" className="text-sm text-bg/70 hover:text-amber-500 transition-colors font-medium">For providers</a>
           </div>
 
           {/* CTA */}
           <a
             href="#waitlist"
-            className="btn-primary px-6 py-2.5 rounded-full text-ink text-sm font-bold"
+            className="btn-waitlist px-6 py-2.5 rounded-full text-ink text-sm font-bold"
           >
             <span>Join waitlist</span>
           </a>

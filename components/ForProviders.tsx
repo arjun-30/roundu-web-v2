@@ -2,14 +2,14 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { TrendingUp, Zap, Users, Wallet } from 'lucide-react';
+import { TrendingUp, Zap, Users, Wallet, UserCheck, Briefcase } from 'lucide-react';
 
 export default function ForProviders() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const benefits = [
     { icon: TrendingUp, label: 'Keep 90%', sublabel: 'of every booking' },
-    { icon: Zap, label: '5 min', sublabel: 'response time' },
+    { icon: Zap, label: '15 min', sublabel: 'response time' },
     { icon: Users, label: '100+', sublabel: 'customers at launch' },
     { icon: Wallet, label: 'Daily', sublabel: 'payouts to bank' },
   ];
@@ -70,7 +70,7 @@ export default function ForProviders() {
                 onClick={() => {
                   window.dispatchEvent(new CustomEvent('setWaitlistRole', { detail: 'provider' }));
                 }}
-                className="btn-primary inline-flex items-center gap-3 px-8 py-4 rounded-full text-ink font-bold text-base"
+                className="btn-waitlist inline-flex items-center gap-3 px-8 py-4 rounded-full text-ink font-bold text-base"
               >
                 <span>Register as provider</span>
                 <span className="text-lg">→</span>

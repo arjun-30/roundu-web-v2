@@ -158,7 +158,7 @@ export default function Waitlist() {
                         role === r
                           ? 'btn-primary text-ink glow-amber'
                           : 'glass text-bg/60 hover:bg-amber-500/5 hover:text-bg'
-                      }`}
+                      } ${r === 'provider' ? 'font-display' : ''}`}
                     >
                       {r === 'customer' ? 'Customer' : 'Service Provider'}
                     </button>
@@ -249,7 +249,7 @@ export default function Waitlist() {
               <button
                 type="submit"
                 disabled={status === 'loading' || !email}
-                className="btn-primary w-full py-4 rounded-xl text-ink font-bold text-base disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="btn-waitlist w-full py-4 rounded-xl text-ink font-bold text-base disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {status === 'loading' ? (
                   <>
