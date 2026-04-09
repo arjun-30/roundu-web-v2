@@ -52,12 +52,11 @@ export default function TermsPage() {
                 fee of 10% on every completed booking.
             </p>
 
-            <h3>4.2 Cashback</h3>
-            <p>
-                Customers earn 5% cashback on every paid booking, automatically credited
-                to their in-app wallet. Cashback can be used for future bookings but
-                cannot be withdrawn as cash.
-            </p>
+              <p className="text-bg/70 leading-relaxed">
+                Customers earn upto 5% cashback on every paid booking, automatically credited
+                to their RoundU Wallet. Credits are non-transferable and cannot be
+                converted to cash.
+              </p>
 
             <h2>5. Cancellation Policy</h2>
             <p>

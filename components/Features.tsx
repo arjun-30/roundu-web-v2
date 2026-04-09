@@ -18,7 +18,7 @@ const features = [
   },
   {
     icon: Wallet,
-    title: '5% Cashback',
+    title: 'Upto 5% Cashback',
     description: 'Earn instant wallet credit on every booking.',
   },
   {

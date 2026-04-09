@@ -29,7 +29,7 @@ export default function AboutPage() {
                 <li><strong>Government-verified:</strong> Every provider's identity is verified through DigiLocker</li>
                 <li><strong>Live tracking:</strong> See your provider arrive in real-time</li>
                 <li><strong>Fair pricing:</strong> Transparent quotes upfront — no hidden charges, no haggling</li>
-                <li><strong>5% cashback:</strong> Every booking earns you wallet credit for next time</li>
+                <li><strong>Upto 5% cashback:</strong> Every booking earns you wallet credit for next time</li>
                 <li><strong>100+ services:</strong> Electrician, plumber, cleaner, mechanic, painter, AC repair, and more</li>
             </ul>
 

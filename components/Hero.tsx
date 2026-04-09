@@ -56,13 +56,22 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full glass-amber mb-12 border border-orange/20"
+              className="inline-flex items-center gap-3 px-6 py-2 rounded-full relative mb-12 group"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-              </span>
-              <span className="text-base font-medium text-amber-300 font-mono tracking-wide uppercase">LAUNCHING SOON IN VELLORE & CHENNAI</span>
+              {/* Animated Border Glow */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-500/50 via-orange-500/50 to-amber-500/50 blur-[2px] p-[1px] animate-shimmer-slow">
+                <div className="absolute inset-0 rounded-full bg-navy-950/90" />
+              </div>
+              
+              <div className="relative flex items-center gap-3">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.8)]"></span>
+                </span>
+                <span className="text-sm font-bold text-amber-100 font-mono tracking-[0.2em] uppercase drop-shadow-[0_0_8px_rgba(245,158,11,0.4)]">
+                  Launching soon in <span className="text-orange">Vellore & Chennai</span>
+                </span>
+              </div>
             </motion.div>
 
             {/* Headline */}
@@ -88,23 +97,22 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="mt-8 text-lg md:text-xl text-bg/65 max-w-xl leading-relaxed"
             >
-              RoundU connects you with verified{' '}
-              <span className="inline-block min-w-[140px] text-left">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={services[index]}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="font-display font-bold text-amber-500 cursor-default inline-block tracking-tight"
-                  >
-                    {services[index]}
-                  </motion.span>
-                </AnimatePresence>
-              </span>
-              , and 100+ more service providers at your doorstep in under 15 minutes.
-              Join the waitlist to be first in line.
+              RoundU connects you with 100+ verified service providers at your doorstep
+              in under 15 minutes—from{' '}
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={services[index]}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="font-display font-bold text-amber-500 cursor-default inline-block tracking-tight"
+                >
+                  {services[index]}
+                </motion.span>
+              </AnimatePresence>
+              <br />
+              and much more. Join the waitlist to be first in line.
             </motion.p>
 
             {/* CTAs */}
