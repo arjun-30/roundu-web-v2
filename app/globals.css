@@ -263,16 +263,13 @@ body {
 
 .glow-launch-amber {
   box-shadow: 
-    0 0 20px rgba(245, 158, 11, 0.4),
-    0 0 40px rgba(245, 158, 11, 0.2),
-    inset 0 0 12px rgba(245, 158, 11, 0.2);
-  border-color: rgba(245, 158, 11, 0.5) !important;
+    0 0 10px rgba(245, 158, 11, 0.2),
+    0 0 20px rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3) !important;
 }
 
 .text-glow-amber {
-  text-shadow: 
-    0 0 10px rgba(245, 158, 11, 0.8),
-    0 0 20px rgba(245, 158, 11, 0.4);
+  text-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
 }
 
 .neon-border {
@@ -453,12 +450,44 @@ body {
   display: flex;
   width: max-content;
   animation: marquee 40s linear infinite;
+  transform-style: preserve-3d;
 }
 
 .marquee-reverse {
   display: flex;
   width: max-content;
   animation: marquee-reverse 50s linear infinite;
+  transform-style: preserve-3d;
+}
+
+/* 3D PERSPECTIVE UTILS */
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.tilt-3d-row-1 {
+  transform: rotateY(-15deg) rotateX(4deg);
+}
+
+.tilt-3d-row-2 {
+  transform: rotateY(15deg) rotateX(-4deg);
+}
+
+.item-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.item-3d:hover {
+  transform: translateZ(60px) scale(1.15);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

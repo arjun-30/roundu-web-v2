@@ -5,16 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Sparkles, Zap } from 'lucide-react';
 
 const services = [
-  'electricians',
+  'housekeepers',
   'plumbers',
-  'cleaners',
-  'mechanics',
   'car washers',
-  'AC repairers',
-  'painters',
-  'carpenters',
-  'beauticians',
-  'gardeners'
+  'mechanics',
+  'electricians'
 ];
 
 export default function Hero() {
@@ -50,13 +45,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full glass-amber glow-launch-amber mb-12 shadow-[0_0_30px_rgba(245,158,11,0.3)]"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full glass-amber mb-12 border border-orange/20"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
               </span>
-              <span className="text-base font-medium text-amber-300 font-mono tracking-wide uppercase text-glow-amber">LAUNCHING SOON IN VELLORE & CHENNAI</span>
+              <span className="text-base font-medium text-amber-300 font-mono tracking-wide uppercase">LAUNCHING SOON IN VELLORE & CHENNAI</span>
             </motion.div>
 
             {/* Headline */}
@@ -83,11 +78,11 @@ export default function Hero() {
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={services[index]}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
-                    transition={{ duration: 0.5, ease: 'easeOut' }}
-                    className="font-serif font-bold italic text-orange glow-text-orange"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="font-sans font-extrabold text-orange cursor-default inline-block tracking-tight"
                   >
                     {services[index]}
                   </motion.span>
