@@ -23,7 +23,10 @@ export default function Nav() {
               <span className="relative z-10">R</span>
               <div className="absolute inset-0 rounded-xl bg-amber-500 blur-xl opacity-50 group-hover:opacity-80 transition-opacity"></div>
             </div>
-            <span className="font-display text-2xl font-semibold text-bg">roundu</span>
+            <div className="flex flex-col">
+              <span className="font-display text-2xl font-semibold text-bg leading-none">RoundU</span>
+              <span className="text-[9px] uppercase tracking-widest text-amber-500 mt-1 opacity-80 font-mono">The circle of convenience</span>
+            </div>
           </a>
 
           {/* Links */}

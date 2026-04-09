@@ -40,7 +40,7 @@ const features = [
   {
     icon: MapPin,
     title: 'Live Tracking',
-    description: 'See your provider on the map in real-time, just like Ola.',
+    description: 'See your provider on the map in real-time.',
   },
   {
     icon: Shield,
