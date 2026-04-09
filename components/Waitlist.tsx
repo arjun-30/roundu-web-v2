@@ -150,9 +150,10 @@ export default function Waitlist() {
             </motion.div>
           ) : (
             <motion.form
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
               onSubmit={handleSubmit}
               className="glass-dark rounded-3xl p-8 md:p-10 text-left border border-amber-500/20"
             >

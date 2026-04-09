@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Brain, Video, Wallet, Gift, Calendar, Bell, MapPin, Shield } from 'lucide-react';
 
@@ -52,14 +52,19 @@ const features = [
 
 export default function Features() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { scrollY } = useScroll();
+  
+  // Parallax offsets
+  const y1 = useTransform(scrollY, [0, 2000], [0, 150]);
+  const y2 = useTransform(scrollY, [0, 2000], [0, -100]);
 
   return (
     <section id="features" ref={ref} className="relative py-32 mesh-bg overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-25" />
 
-      {/* Background orbs */}
-      <div className="orb orb-amber w-[500px] h-[500px] top-1/4 -left-32 animate-pulse-glow" />
-      <div className="orb orb-secondary w-[500px] h-[500px] bottom-0 -right-32 animate-pulse-glow" style={{ animationDelay: '2s' }} />
+      {/* Background orbs with Parallax */}
+      <motion.div style={{ y: y1 }} className="absolute orb orb-amber w-[500px] h-[500px] top-1/4 -left-32 animate-pulse-glow" />
+      <motion.div style={{ y: y2, animationDelay: '2s' }} className="absolute orb orb-secondary w-[500px] h-[500px] bottom-0 -right-32 animate-pulse-glow" />
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         {/* Section header */}
@@ -100,9 +105,10 @@ export default function Features() {
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 50 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, delay: 0.1 + i * 0.08 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: i * 0.05 }}
                 className={`tilt-card tilt-card-amber group relative glass-dark rounded-3xl p-8 overflow-hidden ${feature.span || ''}`}
               >
                 {/* Hover gradient overlay */}

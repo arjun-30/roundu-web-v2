@@ -272,6 +272,10 @@ body {
   text-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
 }
 
+.text-glow-white {
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
 .neon-border {
   position: relative;
   border: 1px solid rgba(59, 130, 246, 0.25);

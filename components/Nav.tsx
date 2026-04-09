@@ -1,9 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -13,10 +20,16 @@ export default function Nav() {
 
   return (
     <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? 'py-3' : 'py-6'}`}>
-      <div className="container mx-auto px-6 lg:px-12">
+      <div className="container mx-auto px-6 lg:px-12 relative">
         <div className={`flex items-center justify-between transition-all duration-700 group/nav ${
           scrolled ? 'glass-dark rounded-full px-6 py-3 glow-amber border border-white/5' : ''
-        } hover:bg-white/[0.03] hover:backdrop-blur-3xl hover:border-white/20 hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]`}>
+        } hover:bg-white/[0.03] hover:backdrop-blur-3xl hover:border-white/20 hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] relative overflow-hidden`}>
+          
+          {/* Scroll Progress Bar */}
+          <motion.div
+            className="absolute bottom-0 left-0 right-0 h-[2px] bg-amber-500 origin-left z-20"
+            style={{ scaleX }}
+          />
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center font-display font-bold text-ink text-lg group-hover:scale-110 transition-transform">

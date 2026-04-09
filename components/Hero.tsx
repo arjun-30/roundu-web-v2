@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Sparkles, Zap } from 'lucide-react';
 
 const services = [
@@ -9,11 +9,18 @@ const services = [
   'plumbers',
   'car washers',
   'mechanics',
-  'electricians'
+  'electricians',
+  'acting drivers'
 ];
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
+  const { scrollY } = useScroll();
+  
+  // Parallax offsets for orbs
+  const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 1000], [0, -150]);
+  const y3 = useTransform(scrollY, [0, 1000], [0, 100]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -27,10 +34,10 @@ export default function Hero() {
       {/* Grid overlay */}
       <div className="absolute inset-0 grid-bg opacity-50" />
 
-      {/* Animated neon orbs */}
-      <div className="orb orb-amber w-[600px] h-[600px] -top-32 -left-32 animate-pulse-glow" />
-      <div className="orb orb-secondary w-[700px] h-[700px] -bottom-32 -right-32 animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
-      <div className="orb orb-navy w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse-glow" style={{ animationDelay: '3s' }} />
+      {/* Animated neon orbs with Parallax */}
+      <motion.div style={{ y: y1 }} className="absolute orb orb-amber w-[600px] h-[600px] -top-32 -left-32 animate-pulse-glow" />
+      <motion.div style={{ y: y2, animationDelay: '1.5s' }} className="absolute orb orb-secondary w-[700px] h-[700px] -bottom-32 -right-32 animate-pulse-glow" />
+      <motion.div style={{ y: y3, animationDelay: '3s' }} className="absolute orb orb-navy w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse-glow" />
 
       {/* Scan line */}
       <div className="scan-line" />
@@ -59,11 +66,15 @@ export default function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="font-display text-hero font-semibold text-bg leading-[0.9] tracking-tight"
+              className="font-display text-hero font-semibold leading-[0.9] tracking-tight group"
             >
-              Home services
+              <span className="text-white transition-all duration-500 group-hover:text-glow-white">
+                Home services
+              </span>
               <br />
-              <span className="text-orange italic">in a heartbeat.</span>
+              <span className="text-amber-500 italic transition-all duration-500 group-hover:text-glow-amber">
+                in a heartbeat.
+              </span>
             </motion.h1>
 
             {/* Subhead */}
@@ -82,13 +93,13 @@ export default function Hero() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="font-sans font-extrabold text-orange cursor-default inline-block tracking-tight"
+                    className="font-display font-bold text-amber-500 cursor-default inline-block tracking-tight"
                   >
                     {services[index]}
                   </motion.span>
                 </AnimatePresence>
               </span>
-              , and 100+ more service providers — at your doorstep in under 15 minutes.
+              , and 100+ more service providers at your doorstep in under 15 minutes.
               Join the waitlist to be first in line.
             </motion.p>
 
