@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -32,15 +33,16 @@ export default function Nav() {
             style={{ scaleX }}
           />
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center font-display font-bold text-ink text-lg group-hover:scale-110 transition-transform">
-              <span className="relative z-10">R</span>
-              <div className="absolute inset-0 rounded-xl bg-amber-500 blur-xl opacity-50 group-hover:opacity-80 transition-opacity"></div>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display text-2xl font-semibold text-bg leading-none">RoundU</span>
-              <span className="text-[9px] uppercase tracking-widest text-amber-500 mt-1 opacity-80 font-mono">The circle of convenience</span>
-            </div>
+          <Link href="/" className="flex items-center gap-2 group">
+            <Image
+              src="/logo.png"
+              alt="RoundU"
+              width={120}
+              height={48}
+              priority
+              className="object-contain group-hover:scale-105 transition-transform duration-300"
+              style={{ maxHeight: 48, width: 'auto' }}
+            />
           </Link>
 
           {/* Links */}

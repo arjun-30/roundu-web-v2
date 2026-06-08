@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { Instagram, Linkedin, Twitter, Facebook, Youtube, Mail, MapPin } from 'lucide-react';
 
 const socials = [
@@ -40,12 +41,15 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="lg:col-span-5">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center font-display font-bold text-ink text-xl">
-                <span className="relative z-10">R</span>
-                <div className="absolute inset-0 rounded-xl bg-amber-500 blur-xl opacity-50"></div>
-              </div>
-              <span className="font-display text-3xl font-semibold text-bg">roundu</span>
+            <div className="mb-6">
+              <Image
+                src="/logo.png"
+                alt="RoundU"
+                width={160}
+                height={64}
+                className="object-contain"
+                style={{ maxHeight: 64, width: 'auto' }}
+              />
             </div>
 
             <p className="text-bg/55 leading-relaxed mb-8 max-w-sm">
