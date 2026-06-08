@@ -66,7 +66,7 @@ function LoginGate({ onSuccess }: { onSuccess: () => void }) {
     setError('');
 
     try {
-      const adminPass = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || '12345678';
+      const adminPass = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || '0911';
       if (password === adminPass) {
         onSuccess();
       } else {

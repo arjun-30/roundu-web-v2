@@ -24,8 +24,8 @@
   /* Cool off-white (blue-grey tint)      */
   --navy: #0F2440;
   /* Deep slate-navy                      */
-  --navy-deep: #060F1E;
-  /* Near-black surface                   */
+  --navy-deep: #152E4B;
+  /* Primary brand background             */
   --secondary: #1E4A8A;
   /* Mid steel-blue for depth             */
   --accent: #3B82F6;
@@ -51,7 +51,7 @@ html {
 
 body {
   font-family: var(--font-satoshi);
-  background: var(--navy-deep);
+  background: #152E4B;
   color: var(--bg);
   overflow-x: hidden;
 }
@@ -67,7 +67,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #060F1E;
+  background: #152E4B;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -168,7 +168,7 @@ body {
    MESH GRADIENT BACKGROUNDS — cool, restrained depth
    ═══════════════════════════════════════════════════════════════════════════ */
 .mesh-bg {
-  background-color: #020B18;
+  background-color: #152E4B;
   background-image:
     radial-gradient(at 20% 30%, rgba(59, 130, 246, 0.14) 0px, transparent 50%),
     radial-gradient(at 80% 10%, rgba(29, 78, 216, 0.12) 0px, transparent 50%),
@@ -177,7 +177,7 @@ body {
 }
 
 .mesh-bg-navy {
-  background-color: #060F1E;
+  background-color: #152E4B;
   background-image:
     radial-gradient(at 30% 20%, rgba(59, 130, 246, 0.09) 0px, transparent 60%),
     radial-gradient(at 70% 80%, rgba(29, 78, 216, 0.07) 0px, transparent 60%);
