@@ -37,11 +37,11 @@ export default function Nav() {
             <Image
               src="/logo.png"
               alt="RoundU"
-              width={120}
-              height={48}
+              width={160}
+              height={64}
               priority
               className="object-contain group-hover:scale-105 transition-transform duration-300"
-              style={{ maxHeight: 48, width: 'auto' }}
+              style={{ maxHeight: 64, width: 'auto' }}
             />
           </Link>
 
