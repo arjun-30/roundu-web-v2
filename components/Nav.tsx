@@ -34,15 +34,9 @@ export default function Nav() {
           />
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <Image
-              src="/logo.png"
-              alt="RoundU"
-              width={220}
-              height={72}
-              priority
-              className="object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
-              style={{ maxHeight: 72, width: 'auto' }}
-            />
+            <span className="text-2xl font-bold tracking-wide text-white group-hover:text-amber-400 transition-colors">
+              RoundU
+            </span>
           </Link>
 
           {/* Links */}
