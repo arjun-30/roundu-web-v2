@@ -34,7 +34,7 @@ export default function Nav() {
           />
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-2xl font-bold tracking-wide text-blue-500 group-hover:text-blue-400 transition-colors">
+            <span className="text-2xl font-bold tracking-wide text-[#152E4B] group-hover:opacity-80 transition-opacity">
               round<span className="text-amber-500 group-hover:text-amber-400">U</span>
             </span>
           </Link>
