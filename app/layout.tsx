@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import SplashScreen from '@/components/SplashScreen';
 
 export const metadata: Metadata = {
   title: 'RoundU — The Circle of Convenience | Home Services On Demand',
@@ -23,7 +22,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="noise">
-        <SplashScreen />
         {children}
       </body>
     </html>
