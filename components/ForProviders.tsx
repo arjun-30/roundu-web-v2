@@ -1,96 +1,85 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { TrendingUp, Zap, Users, Wallet, UserCheck, Briefcase } from 'lucide-react';
+import { TrendingUp, Clock, Users, Wallet, ShieldCheck, ArrowRight } from 'lucide-react';
 
 export default function ForProviders() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
-  const { scrollY } = useScroll();
-  const yOrb = useTransform(scrollY, [0, 3000], [0, 200]);
 
   const benefits = [
-    { icon: TrendingUp, label: 'Keep 90%', sublabel: 'of every booking' },
-    { icon: Zap, label: '15 min', sublabel: 'response time' },
-    { icon: Users, label: '100+', sublabel: 'customers at launch' },
-    { icon: Wallet, label: 'Daily', sublabel: 'payouts to bank' },
+    { icon: TrendingUp, label: 'Keep 90%', sublabel: 'Of every booking revenue' },
+    { icon: Clock, label: '<15 Mins', sublabel: 'Average customer dispatch match' },
+    { icon: Wallet, label: 'Daily Payouts', sublabel: 'Direct settlement to your bank' },
+    { icon: ShieldCheck, label: 'DigiLocker Badge', sublabel: 'Build instant customer trust' },
   ];
 
   return (
-    <section id="providers" ref={ref} className="relative py-32 overflow-hidden">
-      {/* Navy gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-navy-700 via-navy-900 to-navy-950" />
-      <div className="absolute inset-0 grid-bg opacity-30" />
-
-      {/* Glow with Parallax */}
-      <motion.div style={{ y: yOrb }} className="absolute orb orb-amber w-[700px] h-[700px] top-0 right-0 animate-pulse-glow" />
-
+    <section id="providers" ref={ref} className="relative py-28 bg-slate-900/60 border-y border-slate-800/80">
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
 
           {/* LEFT — Copy */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-6"
           >
-            <p className="font-mono text-xs tracking-[0.3em] text-amber-400 uppercase mb-6">
-              [ for providers ]
-            </p>
+            <span className="badge-pill mb-6 inline-flex">
+              For Local Service Providers
+            </span>
 
-            <h2 className="font-display text-display font-semibold text-bg">
-              Your skills <br />
-              <span className="italic text-orange glow-text-orange">deserve more than word of mouth.</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight mb-6">
+              Your skills deserve more <br />
+              <span className="text-amber-400">than word-of-mouth.</span>
             </h2>
 
-            <p className="mt-8 text-lg text-bg/65 leading-relaxed max-w-lg">
-              Build a steady flow of customers. Get paid directly to your bank
-              account. Showcase your work with video intros and before/after photos.
-              Keep 90% of what you charge — we only take 10%.
+            <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-8 max-w-xl">
+              Build a steady daily income with RoundU. Get direct customer bookings near your area, showcase video intros and past work, and enjoy transparent 90% payout rates.
             </p>
 
-            <div className="mt-10">
-              <a
-                href="#waitlist"
-                onClick={() => {
-                  window.dispatchEvent(new CustomEvent('setWaitlistRole', { detail: 'provider' }));
-                }}
-                className="btn-waitlist inline-flex items-center gap-3 px-8 py-4 rounded-full text-ink font-bold text-base"
-              >
-                <span>Register as provider</span>
-                <span className="text-lg">→</span>
-              </a>
-            </div>
+            <a
+              href="#waitlist"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('setWaitlistRole', { detail: 'provider' }));
+              }}
+              className="btn-amber inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-slate-950 font-bold text-sm"
+            >
+              <span>Register as a Provider</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </motion.div>
 
-          {/* RIGHT — Benefit cards in offset grid */}
-          <div className="grid grid-cols-2 gap-4">
-            {benefits.map((benefit, i) => {
-              const Icon = benefit.icon;
+          {/* RIGHT — Benefit Grid */}
+          <div className="lg:col-span-6 grid sm:grid-cols-2 gap-4">
+            {benefits.map((b, i) => {
+              const Icon = b.icon;
               return (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-                  className="glass-dark rounded-2xl p-6 hover:bg-amber-500/5 transition-colors border border-amber-500/20 hover:border-amber-500/40"
-                  style={{ transform: `translateY(${i % 2 === 0 ? '0' : '2rem'})` }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.1 + i * 0.08 }}
+                  className="surface-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5 text-amber-500" />
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-4 text-amber-400">
+                    <Icon className="w-5 h-5" />
                   </div>
-                  <div className="font-display text-3xl md:text-4xl font-bold text-bg">
-                    {benefit.label}
-                  </div>
-                  <div className="text-sm text-bg/50 mt-1">
-                    {benefit.sublabel}
+
+                  <div>
+                    <div className="text-2xl font-extrabold text-white tracking-tight mb-1">
+                      {b.label}
+                    </div>
+                    <div className="text-xs text-slate-400 font-medium">
+                      {b.sublabel}
+                    </div>
                   </div>
                 </motion.div>
               );
             })}
           </div>
+
         </div>
       </div>
     </section>

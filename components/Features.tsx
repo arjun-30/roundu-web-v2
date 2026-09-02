@@ -1,136 +1,116 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Brain, Video, Wallet, Gift, Calendar, Bell, MapPin, Shield } from 'lucide-react';
+import { Zap, ShieldCheck, MapPin, Wallet, Calendar, Video, Star, RefreshCw } from 'lucide-react';
 
 const features = [
   {
-    icon: Brain,
-    title: 'AI Recommendations',
-    description: 'Personalized service suggestions based on your home, preferences, and past bookings. The more you use, the smarter it gets.',
+    icon: Zap,
+    title: '15-Minute Hyperlocal Match',
+    description: 'Instant pairing with top-rated service professionals nearest to your house. No endless calling or waiting around.',
+    span: 'md:col-span-2',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'DigiLocker Verified Pros',
+    description: 'Every provider\'s Aadhaar, PAN, and identity are government-verified before their first job.',
+  },
+  {
+    icon: MapPin,
+    title: 'Real-Time GPS Tracking',
+    description: 'Track your service provider\'s route on a live map from dispatch straight to your doorstep.',
+  },
+  {
+    icon: Wallet,
+    title: '5% Instant Cashback',
+    description: 'Earn instant wallet credits on every completed service to save on your next booking.',
+  },
+  {
+    icon: Calendar,
+    title: 'Automated Subscriptions',
+    description: 'Set weekly car washing, bi-weekly house cleaning, or quarterly AC maintenance on autopilot.',
     span: 'md:col-span-2',
   },
   {
     icon: Video,
-    title: 'Video Profiles',
-    description: 'Watch provider intros and see before/after photos before you book.',
-  },
-  {
-    icon: Wallet,
-    title: 'Upto 5% Cashback',
-    description: 'Earn instant wallet credit on every booking.',
-  },
-  {
-    icon: Gift,
-    title: 'Refer & Earn',
-    description: 'Share your code, both of you get ₹100 when your friend books.',
-  },
-  {
-    icon: Calendar,
-    title: 'Subscription Plans',
-    description: 'Weekly car wash, monthly cleaning, quarterly AC service. Set it once, your home stays perfect.',
-    span: 'md:col-span-2',
-  },
-  {
-    icon: Bell,
-    title: 'Smart Reminders',
-    description: 'Push notifications + AI voice calls 30 min before service.',
-  },
-  {
-    icon: MapPin,
-    title: 'Live Tracking',
-    description: 'See your provider on the map in real-time.',
-  },
-  {
-    icon: Shield,
-    title: 'Verified via DigiLocker',
-    description: 'Every provider\'s Aadhaar and PAN are government-verified. Real people, real credentials.',
-    span: 'md:col-span-2',
+    title: 'Video Intros & Portfolios',
+    description: 'Watch 30-second provider intros and inspect before-and-after work photos before you book.',
   },
 ];
 
 export default function Features() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
-  const { scrollY } = useScroll();
-  
-  // Parallax offsets
-  const y1 = useTransform(scrollY, [0, 2000], [0, 150]);
-  const y2 = useTransform(scrollY, [0, 2000], [0, -100]);
 
   return (
-    <section id="features" ref={ref} className="relative py-32 mesh-bg overflow-hidden">
-      <div className="absolute inset-0 grid-bg opacity-25" />
-
-      {/* Background orbs with Parallax */}
-      <motion.div style={{ y: y1 }} className="absolute orb orb-amber w-[500px] h-[500px] top-1/4 -left-32 animate-pulse-glow" />
-      <motion.div style={{ y: y2, animationDelay: '2s' }} className="absolute orb orb-secondary w-[500px] h-[500px] bottom-0 -right-32 animate-pulse-glow" />
-
+    <section id="features" ref={ref} className="relative py-28 bg-slate-950/40">
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        {/* Section header */}
-        <div className="max-w-3xl mb-20">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6 }}
-            className="font-mono text-xs tracking-[0.3em] text-amber-500 uppercase mb-6"
+        
+        {/* Section Header */}
+        <div className="max-w-3xl mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="mb-4"
           >
-            [ why roundu ]
-          </motion.p>
+            <span className="badge-pill">
+              Why RoundU
+            </span>
+          </motion.div>
+
           <motion.h2
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-display font-semibold text-bg"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight"
           >
-            Not just an app.
-            <br />
-            <span className="text-orange italic glow-text-orange">A whole new way to run your home.</span>
+            Not just another booking app. <br />
+            <span className="text-amber-400">A better way to run your home.</span>
           </motion.h2>
+
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-6 text-lg text-bg/65 max-w-2xl"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed"
           >
-            We rebuilt home services from scratch — AI-powered, hyperlocal,
-            and designed for people who don't have time to wait.
+            We rebuilt home services around speed, trust, and total transparency — built specifically for households in Vellore and Chennai.
           </motion.p>
         </div>
 
-        {/* Bento grid */}
+        {/* Bento Grid */}
         <div className="grid md:grid-cols-3 gap-6">
           {features.map((feature, i) => {
             const Icon = feature.icon;
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: i * 0.05 }}
-                className={`tilt-card tilt-card-amber group relative glass-dark rounded-3xl p-8 overflow-hidden ${feature.span || ''}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className={`surface-card rounded-2xl p-7 border border-slate-800 hover:border-amber-500/30 flex flex-col justify-between ${
+                  feature.span || ''
+                }`}
               >
-                {/* Hover gradient overlay */}
-                <div className="absolute -top-20 -right-20 w-48 h-48 bg-amber-500/20 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-500 rounded-full" />
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center mb-5 text-amber-400">
+                    <Icon className="w-6 h-6" />
+                  </div>
 
+                  <h3 className="text-xl font-bold text-white mb-2 tracking-tight">
+                    {feature.title}
+                  </h3>
 
-                {/* Icon with glow */}
-                <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center mb-6 glow-amber">
-                  <Icon className="w-7 h-7 text-ink" strokeWidth={2.5} />
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
-
-                {/* Content */}
-                <h3 className="relative font-display text-2xl font-semibold text-bg mb-3">
-                  {feature.title}
-                </h3>
-                <p className="relative text-bg/60 leading-relaxed">
-                  {feature.description}
-                </p>
               </motion.div>
             );
           })}
         </div>
+
       </div>
     </section>
   );

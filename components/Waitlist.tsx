@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Check, Loader2, AlertCircle } from 'lucide-react';
+import { Check, Loader2, AlertCircle, Sparkles } from 'lucide-react';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, query, where, getDocs, serverTimestamp } from 'firebase/firestore';
 
@@ -60,7 +60,7 @@ export default function Waitlist() {
       const existing = await getDocs(query(collection(db, 'waitlist'), where('email', '==', email.toLowerCase())));
       if (!existing.empty) {
         setStatus('error');
-        setMessage("You're already on the waitlist!");
+        setMessage("You're already registered on the waitlist!");
         return;
       }
 
@@ -80,7 +80,7 @@ export default function Waitlist() {
       });
 
       setStatus('success');
-      setMessage("You're in! We'll notify you when RoundU launches.");
+      setMessage("You're on the list! We'll notify you as soon as RoundU goes live in your city.");
       setPosition(newPos);
     } catch (error: any) {
       console.error('Waitlist error:', error);
@@ -90,117 +90,118 @@ export default function Waitlist() {
   }
 
   return (
-    <section id="waitlist" ref={ref} className="relative py-32 overflow-hidden">
-      <div className="absolute inset-0 mesh-bg" />
-      <div className="absolute inset-0 grid-bg opacity-25" />
-
-      {/* Big center glow */}
-      <div className="orb orb-amber w-[900px] h-[900px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse-glow" />
-
-      <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <div className="max-w-2xl mx-auto text-center">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6 }}
-            className="font-mono text-xs tracking-[0.3em] text-amber-500 uppercase mb-6"
+    <section id="waitlist" ref={ref} className="relative py-28 bg-slate-950">
+      <div className="container mx-auto px-6 lg:px-12 relative z-10 max-w-2xl">
+        
+        {/* Section Title */}
+        <div className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="mb-4"
           >
-            [ join the waitlist ]
-          </motion.p>
+            <span className="badge-pill">
+              Join the Priority Waitlist
+            </span>
+          </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-display font-semibold text-bg mb-6"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4"
           >
-            Be <span className="text-gradient-amber italic glow-text-amber">first</span> in line.
+            Be first in line when <span className="text-amber-400">RoundU launches.</span>
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-lg text-bg/65 mb-12"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-base text-slate-300 max-w-lg mx-auto"
           >
-            Join 2,000+ others waiting for launch. Get notified the moment we go
-            live in your city — plus exclusive early-bird perks and free credits.
+            Join 2,000+ early users & service pros in Vellore & Chennai. Get priority access + early bird booking credits.
           </motion.p>
+        </div>
 
-          {status === 'success' ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="glass-dark rounded-3xl p-12 border border-amber-500/30 glow-amber"
-            >
-              <div className="w-16 h-16 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center mx-auto mb-6 glow-amber">
-                <Check className="w-8 h-8 text-amber-500" strokeWidth={3} />
+        {/* Success Card or Form */}
+        {status === 'success' ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="surface-card rounded-2xl p-8 sm:p-10 text-center border border-amber-500/30"
+          >
+            <div className="w-14 h-14 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto mb-5 text-amber-400">
+              <Check className="w-7 h-7" />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-2">You're on the list!</h3>
+            <p className="text-slate-300 text-sm mb-6">{message}</p>
+            {position && (
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 border border-slate-800 text-slate-300 text-sm font-medium">
+                <span>Waitlist Spot:</span>
+                <span className="text-amber-400 font-bold">#{position}</span>
               </div>
-              <h3 className="font-display text-3xl font-semibold text-bg mb-3">
-                You're in!
-              </h3>
-              <p className="text-bg/70 mb-4">{message}</p>
-              {position && (
-                <div className="inline-block px-6 py-3 rounded-full glass-amber border border-amber-500/40">
-                  <span className="text-bg/50 text-sm">You're </span>
-                  <span className="font-display text-amber-400 font-bold text-lg">#{position}</span>
-                  <span className="text-bg/50 text-sm"> on the list</span>
-                </div>
-              )}
-            </motion.div>
-          ) : (
-            <motion.form
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              onSubmit={handleSubmit}
-              className="glass-dark rounded-3xl p-8 md:p-10 text-left border border-amber-500/20"
-            >
-              {/* Role toggle */}
-              <div className="mb-6">
-                <label className="block text-xs font-mono tracking-wider text-amber-500/80 uppercase mb-3">
-                  I am a
-                </label>
-                <div className="grid grid-cols-2 gap-3">
-                  {(['customer', 'provider'] as const).map((r) => (
-                    <button
-                      key={r}
-                      type="button"
-                      onClick={() => {
-                        setRole(r);
-                      }}
-                      className={`py-3 px-4 rounded-xl font-bold transition-all ${
-                        role === r
-                          ? 'btn-orange text-ink glow-amber'
-                          : 'glass text-bg/60 hover:bg-amber-500/5 hover:text-bg'
-                      } ${r === 'provider' ? 'font-display' : ''}`}
-                    >
-                      {r === 'customer' ? 'Customer' : 'Service Provider'}
-                    </button>
-                  ))}
-                </div>
+            )}
+          </motion.div>
+        ) : (
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            onSubmit={handleSubmit}
+            className="surface-card rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-2xl"
+          >
+            {/* Role Switcher Tabs */}
+            <div className="mb-6">
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                Register as
+              </label>
+              <div className="grid grid-cols-2 gap-2 p-1 rounded-xl bg-slate-900 border border-slate-800">
+                <button
+                  type="button"
+                  onClick={() => setRole('customer')}
+                  className={`py-2.5 px-4 rounded-lg text-xs font-bold transition-all ${
+                    role === 'customer'
+                      ? 'bg-amber-500 text-slate-950 shadow-md'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  Customer
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setRole('provider')}
+                  className={`py-2.5 px-4 rounded-lg text-xs font-bold transition-all ${
+                    role === 'provider'
+                      ? 'bg-amber-500 text-slate-950 shadow-md'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  Service Provider
+                </button>
               </div>
+            </div>
 
-              {/* Name */}
-              <div className="mb-4">
-                <label className="block text-xs font-mono tracking-wider text-amber-500/80 uppercase mb-2">
-                  Your name *
+            {/* Inputs */}
+            <div className="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                  Full Name *
                 </label>
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Your full name"
-                  className="w-full px-4 py-3 rounded-xl glass text-bg placeholder-bg/30 border border-amber-500/20 focus:border-amber-500/60 focus:outline-none transition-colors"
+                  placeholder="e.g. Rahul Sharma"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm focus:border-amber-500/60 focus:outline-none transition-colors"
                 />
               </div>
 
-              {/* Email */}
-              <div className="mb-4">
-                <label className="block text-xs font-mono tracking-wider text-amber-500/80 uppercase mb-2">
-                  Email address *
+              <div>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                  Email Address *
                 </label>
                 <input
                   type="email"
@@ -208,13 +209,14 @@ export default function Waitlist() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
-                  className="w-full px-4 py-3 rounded-xl glass text-bg placeholder-bg/30 border border-amber-500/20 focus:border-amber-500/60 focus:outline-none transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm focus:border-amber-500/60 focus:outline-none transition-colors"
                 />
               </div>
+            </div>
 
-              {/* Phone */}
-              <div className="mb-4">
-                <label className="block text-xs font-mono tracking-wider text-amber-500/80 uppercase mb-2">
+            <div className="grid sm:grid-cols-2 gap-4 mb-6">
+              <div>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">
                   Phone Number *
                 </label>
                 <input
@@ -222,14 +224,13 @@ export default function Waitlist() {
                   required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder="e.g. 98765 43210"
-                  className="w-full px-4 py-3 rounded-xl glass text-bg placeholder-bg/30 border border-amber-500/20 focus:border-amber-500/60 focus:outline-none transition-colors"
+                  placeholder="98765 43210"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm focus:border-amber-500/60 focus:outline-none transition-colors"
                 />
               </div>
 
-              {/* City */}
-              <div className="mb-6">
-                <label className="block text-xs font-mono tracking-wider text-amber-500/80 uppercase mb-2">
+              <div>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">
                   City *
                 </label>
                 <input
@@ -237,55 +238,51 @@ export default function Waitlist() {
                   required
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  placeholder="Vellore, Chennai, Bengaluru..."
-                  className="w-full px-4 py-3 rounded-xl glass text-bg placeholder-bg/30 border border-amber-500/20 focus:border-amber-500/60 focus:outline-none transition-colors"
+                  placeholder="Vellore, Chennai..."
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm focus:border-amber-500/60 focus:outline-none transition-colors"
                 />
               </div>
+            </div>
 
-              {/* Services (Provider Only) */}
-              {role === 'provider' && (
-                <div className="mb-6">
-                  <label className="block text-xs font-mono tracking-wider text-amber-500/80 uppercase mb-2">
-                    What services do you provide?
-                  </label>
-                  <input
-                    type="text"
-                    value={services}
-                    onChange={(e) => setServices(e.target.value)}
-                    placeholder="e.g. Plumbing, Electrician, Cleaning..."
-                    className="w-full px-4 py-3 rounded-xl glass text-bg placeholder-bg/30 border border-amber-500/20 focus:border-amber-500/60 focus:outline-none transition-colors"
-                  />
-                </div>
+            {role === 'provider' && (
+              <div className="mb-6">
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                  Services Provided
+                </label>
+                <input
+                  type="text"
+                  value={services}
+                  onChange={(e) => setServices(e.target.value)}
+                  placeholder="e.g. Plumbing, Electrical, Car Detailing..."
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm focus:border-amber-500/60 focus:outline-none transition-colors"
+                />
+              </div>
+            )}
+
+            {status === 'error' && (
+              <div className="mb-4 p-3 rounded-xl bg-red-950/40 border border-red-500/30 flex items-center gap-2 text-red-400 text-xs">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{message}</span>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={status === 'loading' || !email || !name || !phone || !city}
+              className="btn-amber w-full py-3.5 rounded-xl text-slate-950 font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {status === 'loading' ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Submitting...</span>
+                </>
+              ) : (
+                <span>Reserve My Spot</span>
               )}
+            </button>
+          </motion.form>
+        )}
 
-              {status === 'error' && (
-                <div className="mb-4 flex items-center gap-2 text-red-400 text-sm">
-                  <AlertCircle className="w-4 h-4" />
-                  <span>{message}</span>
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={status === 'loading' || !email || !name || !phone || !city}
-                className="btn-waitlist w-full py-4 rounded-xl text-ink font-bold text-base disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              >
-                {status === 'loading' ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Joining...</span>
-                  </>
-                ) : (
-                  <span>Reserve my spot →</span>
-                )}
-              </button>
-
-              <p className="text-xs text-bg/40 text-center mt-4">
-                We'll never spam you. Unsubscribe anytime.
-              </p>
-            </motion.form>
-          )}
-        </div>
       </div>
     </section>
   );

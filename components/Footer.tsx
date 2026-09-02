@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import Link from 'next/link';
 import { Instagram, Linkedin, Twitter, Facebook, Youtube, Mail, MapPin } from 'lucide-react';
 
 const socials = [
@@ -12,65 +12,49 @@ const socials = [
 ];
 
 const footerLinks = {
-
   company: [
-    { label: 'About', href: '/about' },
+    { label: 'About Us', href: '/about' },
     { label: 'Contact', href: '/contact' },
-    { label: 'Careers', href: 'mailto:admin@roundu.in?subject=Join%20the%20team' },
-    { label: 'Press', href: 'mailto:admin@roundu.in?subject=Press%20inquiry' },
+    { label: 'For Providers', href: '/#providers' },
   ],
   legal: [
     { label: 'Terms of Service', href: '/terms' },
     { label: 'Privacy Policy', href: '/privacy' },
     { label: 'Refund Policy', href: '/refund' },
-    { label: 'Cookie Policy', href: '/privacy#cookies' },
   ],
 };
+
 export default function Footer() {
   return (
-    <footer className="relative bg-navy-950 border-t border-amber-500/10 overflow-hidden">
-      {/* Massive background wordmark */}
-      <div className="absolute inset-x-0 bottom-0 pointer-events-none">
-        <div className="font-display font-bold text-[20vw] leading-none text-amber-500/[0.04] text-center translate-y-1/4 select-none">
-          roundu
-        </div>
-      </div>
+    <footer className="bg-slate-950 border-t border-slate-800/80 pt-16 pb-12 text-slate-400">
+      <div className="container mx-auto px-6 lg:px-12">
+        <div className="grid lg:grid-cols-12 gap-12 mb-12">
 
-      <div className="container mx-auto px-6 lg:px-12 py-20 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-12 mb-16">
+          {/* Brand Column */}
+          <div className="lg:col-span-6">
+            <Link href="/" className="inline-block mb-4">
+              <span className="text-2xl font-bold tracking-tight text-white">
+                round<span className="text-amber-500">U</span>
+              </span>
+            </Link>
 
-          {/* Brand column */}
-          <div className="lg:col-span-5">
-            <div className="mb-6">
-              <Image
-                src="/logo.png"
-                alt="RoundU"
-                width={160}
-                height={64}
-                className="object-contain"
-                style={{ maxHeight: 64, width: 'auto' }}
-              />
-            </div>
-
-            <p className="text-bg/55 leading-relaxed mb-8 max-w-sm">
-              The circle of convenience. Home services <span className="text-orange font-medium">in a heartbeat.</span>
-              Book verified providers in under 15 minutes.
+            <p className="text-sm text-slate-400 leading-relaxed mb-6 max-w-sm">
+              The circle of convenience. Hyperlocal verified home services in under 15 minutes across Vellore and Chennai.
             </p>
 
-            {/* Contact */}
-            <div className="space-y-3 mb-8">
-              <a href="mailto:admin@roundu.in" className="flex items-center gap-2 text-bg/60 hover:text-amber-500 transition-colors text-sm">
-                <Mail className="w-4 h-4" />
+            <div className="space-y-2 text-xs text-slate-400 mb-6">
+              <a href="mailto:admin@roundu.in" className="flex items-center gap-2 hover:text-amber-400 transition-colors">
+                <Mail className="w-3.5 h-3.5" />
                 <span>admin@roundu.in</span>
               </a>
-              <div className="flex items-center gap-2 text-bg/60 text-sm">
-                <MapPin className="w-4 h-4" />
-                <span>Vellore, Tamil Nadu, India</span>
+              <div className="flex items-center gap-2">
+                <MapPin className="w-3.5 h-3.5" />
+                <span>Vellore & Chennai, Tamil Nadu, India</span>
               </div>
             </div>
 
-            {/* Socials */}
-            <div className="flex gap-3">
+            {/* Social Icons */}
+            <div className="flex gap-2">
               {socials.map((social, i) => {
                 const Icon = social.icon;
                 return (
@@ -80,7 +64,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="group w-11 h-11 rounded-full glass-amber flex items-center justify-center text-bg/60 hover:bg-amber-500 hover:text-ink hover:border-amber-500 transition-all hover:-translate-y-1 hover:glow-amber"
+                    className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-amber-400 hover:border-amber-500/40 transition-all"
                   >
                     <Icon className="w-4 h-4" />
                   </a>
@@ -89,44 +73,43 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Link columns */}
-          <div className="lg:col-span-7 grid grid-cols-2 gap-8">
+          {/* Links Column */}
+          <div className="lg:col-span-6 grid grid-cols-2 gap-8">
             <div>
-              <h4 className="font-mono text-xs tracking-wider text-amber-500 uppercase mb-5">Company</h4>
-              <ul className="space-y-3">
+              <h4 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">Company</h4>
+              <ul className="space-y-2.5 text-xs">
                 {footerLinks.company.map((link, i) => (
                   <li key={i}>
-                    <a href={link.href} className="text-bg/60 hover:text-amber-500 transition-colors text-sm">
+                    <Link href={link.href} className="hover:text-amber-400 transition-colors">
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <h4 className="font-mono text-xs tracking-wider text-amber-500 uppercase mb-5">Legal</h4>
-              <ul className="space-y-3">
+              <h4 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">Legal</h4>
+              <ul className="space-y-2.5 text-xs">
                 {footerLinks.legal.map((link, i) => (
                   <li key={i}>
-                    <a href={link.href} className="text-bg/60 hover:text-amber-500 transition-colors text-sm">
+                    <Link href={link.href} className="hover:text-amber-400 transition-colors">
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
+
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 border-t border-amber-500/10 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-bg/40 font-mono">
-            © 2026 RoundU. Built with care in India.
-          </p>
-          <p className="text-xs text-bg/40 font-mono flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-            All systems operational
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+          <p>© {new Date().getFullYear()} RoundU. Built with care in Tamil Nadu, India.</p>
+          <p className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+            <span>Serving Vellore & Chennai</span>
           </p>
         </div>
       </div>

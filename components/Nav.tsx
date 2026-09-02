@@ -1,18 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -21,36 +13,50 @@ export default function Nav() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? 'py-3' : 'py-6'}`}>
-      <div className="container mx-auto px-6 lg:px-12 relative">
-        <div className={`flex items-center justify-between transition-all duration-700 group/nav ${
-          scrolled ? 'glass-dark rounded-full px-6 py-3 glow-amber border border-white/5' : ''
-        } hover:bg-white/[0.03] hover:backdrop-blur-3xl hover:border-white/20 hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] relative overflow-hidden`}>
-          
-          {/* Scroll Progress Bar */}
-          <motion.div
-            className="absolute bottom-0 left-0 right-0 h-[2px] bg-amber-500 origin-left z-20"
-            style={{ scaleX }}
-          />
+    <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'py-3' : 'py-5'}`}>
+      <div className="container mx-auto px-6 lg:px-12">
+        <div
+          className={`flex items-center justify-between transition-all duration-300 px-6 py-3 rounded-full ${
+            scrolled
+              ? 'bg-slate-900/90 backdrop-blur-md border border-slate-800 shadow-xl'
+              : 'bg-transparent'
+          }`}
+        >
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-2xl font-bold tracking-wide text-[#152E4B] group-hover:opacity-80 transition-opacity">
-              round<span className="text-amber-500 group-hover:text-amber-400">U</span>
+          <Link href="/" className="flex items-center gap-1.5 group">
+            <span className="text-2xl font-bold tracking-tight text-white group-hover:text-amber-400 transition-colors">
+              round<span className="text-amber-500">U</span>
             </span>
           </Link>
 
-          {/* Links */}
-          <div className="hidden md:flex items-center gap-10">
-            <Link href="/#features" className="text-sm text-bg/70 hover:text-amber-500 transition-colors font-medium">Features</Link>
-            <Link href="/#providers" className="text-sm text-bg/70 hover:text-amber-500 transition-colors font-medium">For providers</Link>
+          {/* Nav Links */}
+          <div className="hidden md:flex items-center gap-8">
+            <Link
+              href="/#features"
+              className="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors"
+            >
+              Why RoundU
+            </Link>
+            <Link
+              href="/#providers"
+              className="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors"
+            >
+              For Providers
+            </Link>
+            <Link
+              href="/about"
+              className="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors"
+            >
+              About
+            </Link>
           </div>
 
-          {/* CTA */}
+          {/* Waitlist CTA Button */}
           <Link
             href="/#waitlist"
-            className="btn-waitlist px-6 py-2.5 rounded-full text-ink text-sm font-bold"
+            className="btn-amber px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all"
           >
-            <span>Join waitlist</span>
+            Join Waitlist
           </Link>
         </div>
       </div>

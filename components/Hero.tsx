@@ -1,278 +1,165 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Sparkles, Zap } from 'lucide-react';
-import FloatingServices from './floating';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Sparkles, ShieldCheck, Clock, Star } from 'lucide-react';
+import AppPreview from './AppPreview';
 
-const services = [
-  'housekeepers',
-  'plumbers',
-  'car washers',
-  'mechanics',
-  'electricians',
-  'acting drivers'
+const categoryPills = [
+  'Housekeeping',
+  'Plumbers',
+  'Electricians',
+  'Mechanics',
+  'Car Wash',
+  'Acting Drivers',
 ];
 
 export default function Hero() {
-  const [index, setIndex] = useState(0);
-  const { scrollY } = useScroll();
-  
-  // Parallax offsets for orbs
-  const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 1000], [0, -150]);
-  const y3 = useTransform(scrollY, [0, 1000], [0, 100]);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % services.length);
-    }, 2500);
-    return () => clearInterval(timer);
-  }, []);
+  const [activeCategory, setActiveCategory] = useState(0);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden mesh-bg">
-      {/* Grid overlay */}
-      <div className="absolute inset-0 grid-bg opacity-50" />
+    <section className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden bg-grid-pattern">
+      {/* Organic Subtle Ambient Lighting (No Neon Orbs) */}
+      <div className="ambient-glow ambient-glow-amber w-[600px] h-[600px] -top-32 -left-32" />
+      <div className="ambient-glow ambient-glow-blue w-[700px] h-[700px] -bottom-32 -right-32" />
 
-      {/* Animated neon orbs with Parallax */}
-      <motion.div style={{ y: y1 }} className="absolute orb orb-amber w-[600px] h-[600px] -top-32 -left-32 animate-pulse-glow" />
-      <motion.div style={{ y: y2, animationDelay: '1.5s' }} className="absolute orb orb-secondary w-[700px] h-[700px] -bottom-32 -right-32 animate-pulse-glow" />
-      <motion.div style={{ y: y3, animationDelay: '3s' }} className="absolute orb orb-navy w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse-glow" />
-
-      {/* Scan line */}
-      <div className="scan-line" />
-
-      {/* Floating Service Icons */}
-      <FloatingServices />
-
-      <div className="container mx-auto px-6 lg:px-12 relative z-10 py-16 mt-12">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-
-          {/* LEFT — Copy */}
-          <div>
-            {/* Eyebrow badge */}
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* LEFT — Copy & Hero Action */}
+          <div className="lg:col-span-7">
+            {/* Pill Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-3 px-6 py-2 rounded-full relative mb-12 group"
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20 mb-8"
             >
-              {/* Animated Border Glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-500/50 via-orange-500/50 to-amber-500/50 blur-[2px] p-[1px] animate-shimmer-slow">
-                <div className="absolute inset-0 rounded-full bg-navy-950/90" />
-              </div>
-              
-              <div className="relative flex items-center gap-3">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.8)]"></span>
-                </span>
-                <span className="text-sm font-bold text-amber-100 font-mono tracking-[0.2em] uppercase drop-shadow-[0_0_8px_rgba(245,158,11,0.4)]">
-                  Launching soon in <span className="text-orange">Vellore & Chennai</span>
-                </span>
-              </div>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+              </span>
+              <span className="text-xs font-semibold text-amber-300 tracking-wide uppercase">
+                Launching Soon in Vellore & Chennai
+              </span>
             </motion.div>
 
-            {/* Headline */}
+            {/* Main Headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="font-display text-hero font-semibold leading-[0.9] tracking-tight group"
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.08] mb-6"
             >
-              <span className="text-white transition-all duration-500 group-hover:text-glow-white">
-                Home services
-              </span>
-              <br />
-              <span className="text-amber-500 italic transition-all duration-500 group-hover:text-glow-amber">
-                in a heartbeat.
+              Home services, <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600">
+                delivered in a heartbeat.
               </span>
             </motion.h1>
 
-            {/* Subhead */}
+            {/* Subtitle */}
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="mt-8 text-lg md:text-xl text-bg/65 max-w-xl leading-relaxed"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg sm:text-xl text-slate-300 max-w-xl leading-relaxed mb-8"
             >
-              RoundU connects you with 100+ verified service providers at your doorstep
-              in under 15 minutes—from{' '}
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={services[index]}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="font-display font-bold text-amber-500 cursor-default inline-block tracking-tight"
-                >
-                  {services[index]}
-                </motion.span>
-              </AnimatePresence>
-              <br />
-              and much more. Join the waitlist to be first in line.
+              RoundU matches you with background-checked local professionals at your doorstep in under 15 minutes. Transparent pricing, zero haggling.
             </motion.p>
+
+            {/* Service Pills Selector */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mb-10"
+            >
+              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
+                Select a service to preview:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {categoryPills.map((cat, idx) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(idx)}
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                      activeCategory === idx
+                        ? 'bg-amber-500 text-slate-950 shadow-md'
+                        : 'bg-slate-900/80 text-slate-300 border border-slate-800 hover:border-slate-700'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="mt-10 flex flex-col sm:flex-row gap-4"
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-col sm:flex-row gap-4"
             >
               <a
                 href="#waitlist"
-                className="btn-waitlist group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-ink font-bold text-base"
+                className="btn-amber inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl text-slate-950 font-bold text-base"
               >
                 <Sparkles className="w-4 h-4" />
-                <span>Join the waitlist</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <span>Join the Waitlist</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+
+              <a
+                href="#providers"
+                className="btn-secondary inline-flex items-center justify-center px-6 py-4 rounded-xl text-slate-200 font-semibold text-base"
+              >
+                Register as Provider
               </a>
             </motion.div>
 
-            {/* Stats */}
+            {/* Trust Stats Bar */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="mt-14 flex flex-wrap gap-10"
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mt-14 pt-8 border-t border-slate-800/80 grid grid-cols-3 gap-6 max-w-lg"
             >
-              {[
-                { value: '5+', label: 'Services' },
-                { value: '<15 min', label: 'Response time' },
-                { value: '24/7', label: 'Availability' },
-              ].map((stat, i) => (
-                <div key={i} className="relative">
-                  <div className="font-display text-4xl font-bold text-bg">{stat.value}</div>
-                  <div className="text-xs text-amber-500/80 mt-1 font-mono uppercase tracking-wider">{stat.label}</div>
+              <div>
+                <div className="flex items-center gap-1.5 text-2xl font-extrabold text-white">
+                  <span>100+</span>
                 </div>
-              ))}
+                <div className="text-xs text-slate-400 mt-0.5">Verified Pros</div>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-1.5 text-2xl font-extrabold text-white">
+                  <span>&lt;15m</span>
+                </div>
+                <div className="text-xs text-slate-400 mt-0.5">Dispatch Time</div>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-1 text-2xl font-extrabold text-white">
+                  <span>4.9</span>
+                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                </div>
+                <div className="text-xs text-slate-400 mt-0.5">Average Rating</div>
+              </div>
             </motion.div>
           </div>
 
-          {/* RIGHT — 3D Phone Mockup */}
+          {/* RIGHT — Photorealistic App Preview Showcase */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotateY: -30 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="relative perspective-2000"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="lg:col-span-5 flex justify-center"
           >
-            <div className="phone-3d relative mx-auto w-[280px] md:w-[320px]">
-              {/* Phone frame */}
-              <div className="relative rounded-[3rem] p-3 phone-frame">
-                <div className="rounded-[2.5rem] overflow-hidden bg-navy-950 aspect-[9/19]">
-                  <div className="h-full flex flex-col p-4 mesh-bg">
-                    {/* Status bar */}
-                    <div className="flex justify-between items-center text-[10px] text-bg/60 mb-4 font-mono">
-                      <span>9:41</span>
-                      <span>roundu</span>
-                    </div>
-
-                    {/* Header */}
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <div className="text-[10px] text-amber-400">Good morning!</div>
-                        <div className="font-display text-lg font-semibold text-bg">What do you need?</div>
-                      </div>
-                      <div className="w-8 h-8 rounded-full glass-amber flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></div>
-                      </div>
-                    </div>
-
-                    {/* Search */}
-                    <div className="glass rounded-xl px-3 py-2 mb-4 text-[11px] text-bg/40">
-                      Search any service...
-                    </div>
-
-                    {/* Services grid */}
-                    <div className="grid grid-cols-4 gap-2 mb-4">
-                      {[
-                        { icon: '⚡', label: 'Electric' },
-                        { icon: '💧', label: 'Plumber' },
-                        { icon: '🚗', label: 'Wash' },
-                        { icon: '🔧', label: 'Fix' },
-                      ].map((s, i) => (
-                        <div key={i} className="flex flex-col items-center">
-                          <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-base mb-1">
-                            {s.icon}
-                          </div>
-                          <span className="text-[8px] text-bg/50">{s.label}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Emergency banner */}
-                    <div className="rounded-xl p-3 bg-gradient-to-r from-amber-500/30 to-amber-700/30 border border-amber-500/40 mb-4">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-amber-500/30 flex items-center justify-center">
-                          <Zap className="w-3 h-3 text-amber-300" />
-                        </div>
-                        <div>
-                          <div className="text-[10px] font-semibold text-bg">Emergency service</div>
-                          <div className="text-[8px] text-amber-300">Get help in 15 min</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Pro card */}
-                    <div className="glass-dark rounded-xl p-3 border border-amber-500/30">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-700 flex items-center justify-center text-[10px] font-bold text-ink">RK</div>
-                        <div className="flex-1">
-                          <div className="text-[10px] font-semibold text-bg">Rajesh Kumar</div>
-                          <div className="text-[8px] text-bg/40">★ 4.8 · 1.2 km</div>
-                        </div>
-                        <div className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[8px] font-semibold border border-amber-500/30">
-                          Available
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating badges */}
-              <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -left-20 top-20 glass-dark px-4 py-3 rounded-2xl border border-amber-500/30 glow-amber"
-                style={{ transform: 'translateZ(80px)' }}
-              >
-                <div className="text-[10px] text-bg/50 font-mono">NEW BOOKING</div>
-                <div className="text-sm font-semibold text-bg">Electrician</div>
-                <div className="text-[10px] text-amber-400 mt-1">₹500 · Confirmed</div>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, 15, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute -right-12 bottom-32 glass-dark px-4 py-3 rounded-2xl border border-amber-500/30 glow-amber"
-                style={{ transform: 'translateZ(60px)' }}
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-amber-500 animate-pulse" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] text-bg/50 font-mono">ARRIVING IN</div>
-                    <div className="text-sm font-semibold text-bg">4 min</div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Orbiting accent dot */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-amber-500 rounded-full glow-amber-strong orbit"></div>
-            </div>
+            <AppPreview />
           </motion.div>
-        </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-bg/40 text-xs flex flex-col items-center gap-2">
-        <div className="w-px h-12 bg-gradient-to-b from-transparent via-amber-500 to-transparent animate-shimmer"></div>
-        <span className="font-mono tracking-wider">SCROLL</span>
+        </div>
       </div>
     </section>
   );
