@@ -39,8 +39,8 @@ export function PrimaryLink({ href, children, light = false }: { href: string; c
     <Magnetic>
       <Link
         href={href}
-        className={`group inline-flex h-[52px] items-center gap-3 rounded-[4px] px-7 text-[0.95rem] font-medium transition-colors ${
-          light ? 'bg-paper text-navy-700 hover:bg-white' : 'bg-navy-700 text-paper hover:bg-ink'
+        className={`group inline-flex h-[52px] items-center gap-3 rounded-full px-7 text-[0.95rem] font-medium transition-colors ${
+          light ? 'bg-white text-jet hover:bg-amber-500 hover:text-white' : 'bg-jet text-white hover:bg-amber-600'
         }`}
       >
         {children}
@@ -101,7 +101,7 @@ export function CtaBand({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.8, ease }}
-        className="relative overflow-hidden rounded-[24px] bg-navy-700 px-6 py-20 text-paper lg:px-16 lg:py-28"
+        className="relative overflow-hidden rounded-[24px] bg-jet px-6 py-20 text-paper lg:px-16 lg:py-28"
       >
         <div className="pointer-events-none absolute -right-24 -top-24 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(233,162,74,0.22),rgba(233,162,74,0)_70%)]" />
         <div className="relative mx-auto flex max-w-[1180px] flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">

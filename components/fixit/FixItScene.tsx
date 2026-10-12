@@ -98,7 +98,7 @@ ${osc('fx-hammer', -58, -12, 9, 80)}
 /* the job card under the scene follows the same cycle */
 @keyframes jc-progress{0%,4%{transform:scaleX(.04)}${WORK_END}%,100%{transform:scaleX(1)}}
 .jc-progress{transform-origin:left;animation:jc-progress ${CYCLE}s ease-in-out infinite}
-@keyframes jc-bar{0%,${WORK_END}%{background:#FC7508}${WORK_END + 3}%,100%{background:#3F8F4E}}
+@keyframes jc-bar{0%,${WORK_END}%{background:#FC7508}${WORK_END + 3}%,100%{background:#1E8E4E}}
 .jc-bar{animation:jc-bar ${CYCLE}s linear infinite}
 @keyframes jc-work{0%,${WORK_END}%{opacity:1}${WORK_END + 3}%,100%{opacity:0}}
 @keyframes jc-done{0%,${WORK_END}%{opacity:0}${WORK_END + 3}%,100%{opacity:1}}

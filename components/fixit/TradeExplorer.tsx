@@ -7,13 +7,13 @@ import { fixitCss, type TradeKey } from './FixItScene';
 
 const TradeScene3D = dynamic(() => import('./TradeScene3D'), { ssr: false });
 
-export const trades: { key: TradeKey; name: string; job: string; pro: string; time: string }[] = [
-  { key: 'plumbing', name: 'Plumbing', job: 'Fixing a leaking tap', pro: 'Karthik', time: '12 min' },
-  { key: 'electrical', name: 'Electrical', job: 'Replacing a light fitting', pro: 'Suresh', time: '9 min' },
-  { key: 'cleaning', name: 'Cleaning', job: 'Cleaning the windows', pro: 'Priya', time: '14 min' },
-  { key: 'painting', name: 'Painting', job: 'Repainting a wall', pro: 'Arun', time: '11 min' },
-  { key: 'ac', name: 'AC service', job: 'Servicing the AC', pro: 'Manoj', time: '13 min' },
-  { key: 'carpentry', name: 'Carpentry', job: 'Mounting a wall shelf', pro: 'Ravi', time: '10 min' },
+export const trades: { key: TradeKey; name: string; job: string; pro: string; time: string; issue?: string }[] = [
+  { key: 'plumbing', name: 'Plumbing', job: 'Fixing a leaking tap', pro: 'Karthik', time: '12 min', issue: 'Tap leaking' },
+  { key: 'electrical', name: 'Electrical', job: 'Replacing a light fitting', pro: 'Suresh', time: '9 min', issue: 'Light not working' },
+  { key: 'cleaning', name: 'Cleaning', job: 'Cleaning the windows', pro: 'Priya', time: '14 min', issue: 'Windows dirty' },
+  { key: 'painting', name: 'Painting', job: 'Repainting a wall', pro: 'Arun', time: '11 min', issue: 'Wall faded' },
+  { key: 'ac', name: 'AC service', job: 'Servicing the AC', pro: 'Manoj', time: '13 min', issue: 'AC not cooling' },
+  { key: 'carpentry', name: 'Carpentry', job: 'Mounting a wall shelf', pro: 'Ravi', time: '10 min', issue: 'Shelf loose' },
 ];
 
 const CYCLE_MS = 6000;
@@ -67,11 +67,21 @@ export function ScenePanel({ index }: { index: number }) {
                 <TradeScene3D trade={t.key} />
                 <span className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium text-ink backdrop-blur">
                   <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3F8F4E] opacity-60" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#3F8F4E]" />
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
                   </span>
                   Verified pro · on the job
                 </span>
+                {t.issue && (
+                  <span key={t.key} className="pointer-events-none absolute right-4 top-4 grid text-xs font-medium">
+                    <span className="jc-work col-start-1 row-start-1 flex items-center gap-1.5 rounded-full bg-danger-soft px-3 py-1.5 text-danger-ink">
+                      <span className="h-1.5 w-1.5 rounded-full bg-danger" /> {t.issue}
+                    </span>
+                    <span className="jc-done col-start-1 row-start-1 flex items-center gap-1.5 rounded-full bg-success-soft px-3 py-1.5 text-success-ink">
+                      <span className="h-1.5 w-1.5 rounded-full bg-success" /> Fixed
+                    </span>
+                  </span>
+                )}
               </div>
             </motion.div>
           </AnimatePresence>
@@ -104,7 +114,7 @@ export function ScenePanel({ index }: { index: number }) {
                 <span className="jc-work tabular col-start-1 row-start-1 flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-ink">
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-amber-700" /> {t.time}
                 </span>
-                <span className="jc-done col-start-1 row-start-1 rounded-full bg-[#E8EFE4] px-2.5 py-1 text-center text-[#2F5B2A]">
+                <span className="jc-done col-start-1 row-start-1 rounded-full bg-success-soft px-2.5 py-1 text-center text-success-ink">
                   Done ✓
                 </span>
               </span>

@@ -20,20 +20,20 @@ const steps = [
 ];
 
 // Floating details that orbit the phone, one set per step.
-const chips = [
+const chips: { icon: typeof Clock; text: string; pos: string; depth: number; tone?: 'danger' | 'success' }[][] = [
   [
-    { icon: Droplets, text: 'Kitchen tap is leaking', pos: 'left-[-46%] top-[22%]', depth: 60 },
+    { icon: Droplets, text: 'Kitchen tap is leaking', pos: 'left-[-46%] top-[22%]', depth: 60, tone: 'danger' },
     { icon: Clock, text: 'Now', pos: 'right-[-30%] top-[58%]', depth: 120 },
   ],
   [
-    { icon: BadgeCheck, text: 'DigiLocker verified', pos: 'left-[-50%] top-[30%]', depth: 90 },
+    { icon: BadgeCheck, text: 'DigiLocker verified', pos: 'left-[-50%] top-[30%]', depth: 90, tone: 'success' },
     { icon: Star, text: '4.8 · 420 jobs', pos: 'right-[-34%] top-[18%]', depth: 50 },
-    { icon: CheckCircle2, text: 'Matched in 48s', pos: 'right-[-40%] top-[66%]', depth: 130 },
+    { icon: CheckCircle2, text: 'Matched in 48s', pos: 'right-[-40%] top-[66%]', depth: 130, tone: 'success' },
   ],
   [
     { icon: Clock, text: '6 min away', pos: 'left-[-40%] top-[20%]', depth: 70 },
     { icon: KeyRound, text: 'OTP 4821', pos: 'right-[-30%] top-[46%]', depth: 120 },
-    { icon: CheckCircle2, text: 'Pay after the job', pos: 'left-[-46%] top-[70%]', depth: 40 },
+    { icon: CheckCircle2, text: 'Pay after the job', pos: 'left-[-46%] top-[70%]', depth: 40, tone: 'success' },
   ],
 ];
 
@@ -97,7 +97,10 @@ function Phone({ progress, step, scale }: { progress: MotionValue<number>; step:
             transition={{ type: 'spring', stiffness: 260, damping: 22, delay: 0.08 * i }}
             className={`absolute ${c.pos} hidden sm:flex items-center gap-2.5 whitespace-nowrap rounded-full bg-white/95 px-4 py-2.5 text-sm text-ink shadow-[0_18px_40px_-18px_rgba(14,27,44,0.5)] ring-1 ring-line backdrop-blur`}
           >
-            <c.icon className="h-4 w-4 text-amber-700" strokeWidth={1.75} />
+            <c.icon
+              className={`h-4 w-4 ${c.tone === 'danger' ? 'text-danger' : c.tone === 'success' ? 'text-success' : 'text-amber-700'}`}
+              strokeWidth={1.75}
+            />
             {c.text}
           </motion.div>
         ))}

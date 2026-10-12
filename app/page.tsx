@@ -32,7 +32,7 @@ export default function Home() {
           <div className="lg:col-span-6">
             <p className="eyebrow mb-5">For professionals</p>
             <h2 className="font-serif text-4xl leading-[1.05] text-navy-700 sm:text-5xl">
-              Keep <em className="text-amber-700">90%</em> of every job.
+              Keep <em className="text-success">90%</em> of every job.
             </h2>
           </div>
           <div className="flex flex-col items-start justify-end gap-8 lg:col-span-5 lg:col-start-8">

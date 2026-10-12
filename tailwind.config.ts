@@ -7,6 +7,9 @@ const config: Config = {
       colors: {
         // ── BRAND PALETTE ──
         ink: '#030916',           // text — deep almost-black
+        jet: '#0B0B0D',           // black — nav, primary buttons, CTA, footer
+        success: { DEFAULT: '#1E8E4E', soft: '#E6F4EA', ink: '#14663A' },  // verified / done / fixed
+        danger: { DEFAULT: '#D92D20', soft: '#FDECEA', ink: '#A3241A' },   // problems / errors
         bg: '#EEF2F7',            // background — soft cool white
         // ── EDITORIAL SURFACES (marketing site) ──
         paper: '#F6F3EE',         // warm off-white page

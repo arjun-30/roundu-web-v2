@@ -51,91 +51,115 @@ export default function Nav() {
   }, [open]);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        scrolled || open ? 'border-b border-line bg-paper/90 backdrop-blur-sm' : 'border-b border-transparent bg-transparent'
-      }`}
-    >
-      <nav className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-6 lg:px-10">
-        <Link href="/" aria-label="RoundU home" className="text-navy-700">
-          <Wordmark className="text-[1.75rem]" />
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4">
+      {/* floating black pill; tightens a little once you scroll */}
+      <motion.nav
+        initial={false}
+        animate={{ maxWidth: scrolled ? 1040 : 1240 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className={`relative mx-auto flex h-[60px] items-center justify-between rounded-full bg-jet/95 pl-5 pr-2 ring-1 ring-white/10 backdrop-blur-md transition-shadow duration-500 ${
+          scrolled || open ? 'shadow-[0_18px_40px_-18px_rgba(0,0,0,0.55)]' : 'shadow-[0_10px_30px_-20px_rgba(0,0,0,0.4)]'
+        }`}
+      >
+        <Link href="/" aria-label="RoundU home" className="shrink-0">
+          <Wordmark tone="light" className="text-[1.45rem]" />
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-0.5 md:flex">
           {links.map((l) => {
             const active = pathname === l.href;
             return (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`relative rounded-full px-4 py-2 text-[0.9rem] transition-colors ${
-                  active ? 'text-ink' : 'text-ink/65 hover:text-ink'
+                className={`relative rounded-full px-4 py-2 text-[0.875rem] transition-colors duration-300 ${
+                  active ? 'text-white' : 'text-white/60 hover:text-white'
                 }`}
               >
                 {active && (
                   <motion.span
                     layoutId="nav-active"
-                    className="absolute inset-0 -z-10 rounded-full bg-sand"
+                    className="absolute inset-0 -z-10 rounded-full bg-white/[0.12]"
                     transition={{ type: 'spring', stiffness: 400, damping: 34 }}
                   />
                 )}
                 {l.label}
+                {active && (
+                  <motion.span
+                    layoutId="nav-dot"
+                    className="absolute bottom-[3px] left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-amber-500"
+                    transition={{ type: 'spring', stiffness: 400, damping: 34 }}
+                  />
+                )}
               </Link>
             );
           })}
         </div>
 
-        <div className="flex items-center gap-3">
-          <Link href="/early-access" className="btn-primary h-10 px-5 text-[0.875rem]">
+        <div className="flex items-center gap-1.5">
+          <Link
+            href="/early-access"
+            className="group inline-flex h-11 items-center gap-2 rounded-full bg-white pl-5 pr-2 text-[0.875rem] font-medium text-jet transition-colors hover:bg-amber-500 hover:text-white"
+          >
             Early access
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-jet text-white transition-transform duration-300 group-hover:translate-x-0.5">
+              <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </span>
           </Link>
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
-            className="grid h-10 w-10 place-items-center md:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full bg-white/10 md:hidden"
           >
-            <span className="relative block h-3 w-5">
+            <span className="relative block h-3 w-[18px]">
               <motion.span
                 animate={open ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
-                className="absolute left-0 top-0 h-[1.5px] w-full bg-ink"
+                className="absolute left-0 top-0 h-[1.5px] w-full bg-white"
               />
               <motion.span
                 animate={open ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
-                className="absolute bottom-0 left-0 h-[1.5px] w-full bg-ink"
+                className="absolute bottom-0 left-0 h-[1.5px] w-full bg-white"
               />
             </span>
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: '100svh' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden bg-paper md:hidden"
+            initial={{ opacity: 0, y: -10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto mt-2 max-h-[calc(100svh-88px)] overflow-y-auto rounded-[28px] bg-jet p-3 ring-1 ring-white/10 md:hidden"
           >
-            <ul className="px-6 pt-6">
-              {[{ label: 'Home', href: '/' }, ...links, { label: 'Contact', href: '/contact' }].map((l, i) => (
-                <motion.li
-                  key={l.href}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.06 * i + 0.1, duration: 0.4 }}
-                  className="border-b border-line"
-                >
-                  <Link
-                    href={l.href}
-                    className={`block py-5 font-serif text-3xl ${pathname === l.href ? 'text-amber-700' : 'text-navy-700'}`}
+            <ul>
+              {[{ label: 'Home', href: '/' }, ...links, { label: 'Contact', href: '/contact' }].map((l, i) => {
+                const active = pathname === l.href;
+                return (
+                  <motion.li
+                    key={l.href}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.04 * i + 0.05, duration: 0.3 }}
                   >
-                    {l.label}
-                  </Link>
-                </motion.li>
-              ))}
+                    <Link
+                      href={l.href}
+                      className={`flex items-center justify-between rounded-[18px] px-4 py-4 text-[1.35rem] font-semibold tracking-tight ${
+                        active ? 'bg-white/10 text-white' : 'text-white/70'
+                      }`}
+                    >
+                      {l.label}
+                      {active && <span className="h-2 w-2 rounded-full bg-amber-500" />}
+                    </Link>
+                  </motion.li>
+                );
+              })}
             </ul>
           </motion.div>
         )}

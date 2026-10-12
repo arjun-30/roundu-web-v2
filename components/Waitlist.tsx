@@ -214,7 +214,7 @@ export default function Waitlist() {
                 </div>
 
                 {status === 'error' && (
-                  <p role="alert" className="mt-6 text-sm text-red-700 border-l-2 border-red-700 pl-3">
+                  <p role="alert" className="mt-6 rounded-[10px] bg-danger-soft px-4 py-3 text-sm text-danger-ink">
                     {message}
                   </p>
                 )}

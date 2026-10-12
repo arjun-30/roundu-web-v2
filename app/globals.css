@@ -15,6 +15,7 @@
   --navy: #152E4B;
   --muted: #5B6472;
   --accent: #E8690A;
+  --jet: #0B0B0D;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -68,15 +69,15 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  background: var(--navy);
-  color: var(--paper);
+  background: var(--jet);
+  color: #fff;
   font-weight: 500;
-  border-radius: 4px;
+  border-radius: 999px;
   transition: background-color 0.3s var(--ease);
 }
 
 .btn-primary:hover {
-  background: var(--ink);
+  background: var(--accent);
 }
 
 .btn-primary:focus-visible,
