@@ -1,72 +1,87 @@
-import LegalPage from '@/components/LegalPage';
-import { Mail, MapPin, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import Nav from '@/components/Nav';
+import Footer from '@/components/Footer';
+import Reveal from '@/components/Reveal';
+import { PageHeader } from '@/components/ui';
 
 export const metadata = {
-    title: 'Contact RoundU',
-    description: 'Get in touch with the RoundU team.',
+  title: 'Contact · RoundU',
+  description: 'Get in touch with the RoundU team.',
 };
 
+const channels = [
+  { label: 'Customers', subject: 'Booking help' },
+  { label: 'Professionals', subject: 'Joining RoundU' },
+  { label: 'Press', subject: 'Press inquiry' },
+  { label: 'Investors', subject: 'Investor' },
+];
+
 export default function ContactPage() {
-    return (
-        <LegalPage title="Contact us" updated="April 2026">
-            <p>
-                We'd love to hear from you. Whether you're a customer, a service provider,
-                an investor, or just curious — drop us a line.
-            </p>
+  return (
+    <main>
+      <Nav />
+      <PageHeader
+        label="Contact"
+        title={
+          <>
+            Say <em className="text-navy-300">hello.</em>
+          </>
+        }
+        lead="We reply within a working day."
+      />
 
-            <h2>General Inquiries</h2>
-            <p>
-                Email: <a href="mailto:admin@roundu.in">admin@roundu.in</a>
-                <br />
-                We respond within 24 hours on business days.
-            </p>
+      <section className="mx-auto max-w-[1280px] px-6 pb-24 lg:px-10 lg:pb-32">
+        <div className="grid gap-px overflow-hidden rounded-[20px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {channels.map((c, i) => (
+            <Reveal key={c.label} delay={i * 0.06} className="bg-paper">
+              <a
+                href={`mailto:admin@roundu.in?subject=${encodeURIComponent(c.subject)}`}
+                className="group flex h-full flex-col justify-between gap-16 p-8 transition-colors duration-500 hover:bg-navy-700 hover:text-paper"
+              >
+                <ArrowUpRight
+                  className="h-6 w-6 self-end text-amber-700 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1"
+                  strokeWidth={1.5}
+                />
+                <div>
+                  <h2 className="font-serif text-3xl">{c.label}</h2>
+                  <p className="mt-1 text-sm text-muted transition-colors group-hover:text-paper/60">admin@roundu.in</p>
+                </div>
+              </a>
+            </Reveal>
+          ))}
+        </div>
 
-            <h2>For Customers</h2>
-            <p>
-                Need help with a booking or have a complaint? Email{' '}
-                <a href="mailto:admin@roundu.in">admin@roundu.in</a> with your
-                booking ID and a description of the issue.
+        <Reveal className="mt-16 grid gap-10 border-t border-line pt-10 sm:grid-cols-2">
+          <div>
+            <p className="eyebrow mb-3">Office</p>
+            <p className="text-ink">
+              RoundU Technologies Private Limited
+              <br />
+              Vellore, Tamil Nadu 632001
             </p>
-
-            <h2>For Service Providers</h2>
-            <p>
-                Want to join RoundU as a verified provider? Sign up at{' '}
-                <a href="/">roundu.in</a> and follow the registration steps. Have questions
-                first? Email <a href="mailto:admin@roundu.in">admin@roundu.in</a>.
+          </div>
+          <div>
+            <p className="eyebrow mb-3">Follow</p>
+            <p className="flex flex-wrap gap-x-6 gap-y-2 text-ink">
+              <a className="link-underline" href="https://instagram.com/roundu.in" target="_blank" rel="noopener noreferrer">
+                Instagram
+              </a>
+              <a
+                className="link-underline"
+                href="https://www.linkedin.com/in/roundu-in-4b4140402/?skipRedirect=true"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+              <a className="link-underline" href="https://twitter.com/roundu_in" target="_blank" rel="noopener noreferrer">
+                X / Twitter
+              </a>
             </p>
-
-            <h2>For Press and Media</h2>
-            <p>
-                For interviews, press kits, or media inquiries, contact{' '}
-                <a href="mailto:admin@roundu.in">admin@roundu.in</a> with the subject "Press inquiry".
-            </p>
-
-            <h2>For Investors</h2>
-            <p>
-                We're currently fundraising for our pre-seed round. If you're an angel
-                investor or early-stage VC interested in the Indian home services space,
-                email <a href="mailto:admin@roundu.in">admin@roundu.in</a> with the
-                subject "Investor".
-            </p>
-
-            <h2>Office Address</h2>
-            <p>
-                RoundU Technologies Private Limited
-                <br />
-                Vellore, Tamil Nadu — 632001
-                <br />
-                India
-            </p>
-
-            <h2>Follow Us</h2>
-            <p>
-                Stay updated on our launch and the latest features:
-            </p>
-            <ul>
-                <li><a href="https://instagram.com/roundu.in" target="_blank" rel="noopener noreferrer">Instagram — @roundu.in</a></li>
-                <li><a href="https://linkedin.com/company/roundu" target="_blank" rel="noopener noreferrer">LinkedIn — RoundU</a></li>
-                <li><a href="https://twitter.com/roundu_in" target="_blank" rel="noopener noreferrer">Twitter — @roundu_in</a></li>
-            </ul>
-        </LegalPage>
-    );
+          </div>
+        </Reveal>
+      </section>
+      <Footer />
+    </main>
+  );
 }

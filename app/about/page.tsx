@@ -1,71 +1,57 @@
-import LegalPage from '@/components/LegalPage';
+import Nav from '@/components/Nav';
+import Footer from '@/components/Footer';
+import Reveal from '@/components/Reveal';
+import { CtaBand, PageHeader } from '@/components/ui';
 
 export const metadata = {
-    title: 'About RoundU',
-    description: 'The story behind RoundU — building the circle of convenience for India.',
+  title: 'About · RoundU',
+  description: 'Why we are building RoundU, and where we are starting.',
 };
 
+const values = [
+  { title: 'Fast', body: 'A professional matched in minutes, not a day of phone calls.' },
+  { title: 'Trusted', body: 'Every pro is verified before their first job.' },
+  { title: 'Fair', body: 'Clear prices for you, a fair share for them.' },
+];
+
 export default function AboutPage() {
-    return (
-        <LegalPage title="About RoundU" updated="April 2026">
-            <p style={{ fontSize: '1.25rem', color: '#F59E0B', fontStyle: 'italic' }}>
-                We're rebuilding home services from the ground up — verified, fast, and fair.
-            </p>
+  return (
+    <main>
+      <Nav />
+      <PageHeader
+        label="About"
+        title={
+          <>
+            Home services, <em className="text-navy-300">done properly.</em>
+          </>
+        }
+      />
 
-            <h2>The Problem We're Solving</h2>
-            <p>
-                Finding a trustworthy electrician, plumber, or cleaner in India is broken.
-                You call five different people. Two don't pick up. Two quote wildly
-                different prices. The fifth shows up 4 hours late. And by the end, you've
-                wasted half your day for a 30-minute fix.
-            </p>
-            <p>
-                We've all been there. We built RoundU because we were tired of it.
-            </p>
+      <section className="mx-auto grid max-w-[1280px] gap-10 px-6 pb-24 lg:grid-cols-12 lg:px-10 lg:pb-32">
+        <Reveal className="lg:col-span-7">
+          <p className="font-serif text-2xl leading-snug text-ink sm:text-3xl">
+            Finding someone reliable to fix things at home still means calling five people and waiting all day. We
+            started RoundU to make it as simple as booking a ride.
+          </p>
+        </Reveal>
+        <Reveal delay={0.1} className="text-lg leading-relaxed text-muted lg:col-span-4 lg:col-start-9 lg:pt-2">
+          We&rsquo;re a small team in Vellore. We open in Vellore and Chennai first, then the rest of Tamil Nadu.
+        </Reveal>
+      </section>
 
-            <h2>What Makes RoundU Different</h2>
-            <ul>
-                <li><strong>15-minute matching:</strong> AI-powered algorithm finds you the best provider near you, fast</li>
-                <li><strong>Government-verified:</strong> Every provider's identity is verified through DigiLocker</li>
-                <li><strong>Live tracking:</strong> See your provider arrive in real-time</li>
-                <li><strong>Fair pricing:</strong> Transparent quotes upfront — no hidden charges, no haggling</li>
-                <li><strong>Upto 5% cashback:</strong> Every booking earns you wallet credit for next time</li>
-                <li><strong>100+ services:</strong> Electrician, plumber, cleaner, mechanic, painter, AC repair, and more</li>
-            </ul>
+      <section className="mx-auto max-w-[1280px] px-6 pb-24 lg:px-10 lg:pb-32">
+        <div className="grid gap-10 sm:grid-cols-3">
+          {values.map((v, i) => (
+            <Reveal key={v.title} delay={i * 0.08} className="border-t border-ink/70 pt-6">
+              <h2 className="font-serif text-4xl text-navy-700">{v.title}</h2>
+              <p className="mt-3 text-muted">{v.body}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
-            <h2>Our Mission</h2>
-            <p>
-                Make home services as easy as ordering food. Whether you need a bulb
-                changed at 9 PM or a full house deep-clean before guests arrive, RoundU
-                should be the only app you reach for.
-            </p>
-
-            <h2>Where We're Launching</h2>
-            <p>
-                We're starting in <strong>Vellore</strong> and <strong>Chennai</strong> in
-                Tamil Nadu, with expansion to Bengaluru, Coimbatore, and Hyderabad
-                planned within six months.
-            </p>
-
-            <h2>The Team</h2>
-            <p>
-                RoundU is built by a team of engineers, designers, and operators based in
-                Vellore. We're small, scrappy, and obsessed with details.
-            </p>
-
-            <h2>Want to Join Us?</h2>
-            <p>
-                We're always looking for talented people who care about building
-                something useful for India. Email us at{' '}
-                <a href="mailto:admin@roundu.in">admin@roundu.in</a> with the subject
-                "Join the team" and tell us what you'd love to work on.
-            </p>
-
-            <h2>Get in Touch</h2>
-            <p>
-                Questions, feedback, ideas, or partnerships:{' '}
-                <a href="mailto:admin@roundu.in">admin@roundu.in</a>
-            </p>
-        </LegalPage>
-    );
+      <CtaBand title="Want to build this with us?" action="Write to us" href="/contact" />
+      <Footer />
+    </main>
+  );
 }

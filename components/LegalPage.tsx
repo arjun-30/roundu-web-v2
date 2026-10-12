@@ -11,26 +11,31 @@ export default function LegalPage({ title, updated, children }: LegalPageProps) 
   return (
     <>
       <Nav />
-      <div className="pt-32 pb-20 bg-slate-950 min-h-screen relative overflow-hidden text-slate-100">
-        <div className="container mx-auto px-6 max-w-4xl relative z-10">
-          <div className="mb-10">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">{title}</h1>
-            <p className="text-amber-400 text-xs font-semibold uppercase tracking-wider">Last updated: {updated}</p>
-          </div>
+      <main className="pt-40 pb-28 min-h-screen">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10 grid lg:grid-cols-12 gap-10">
+          <header className="lg:col-span-4">
+            <div className="lg:sticky lg:top-32">
+              <p className="eyebrow mb-5">Last updated {updated}</p>
+              <h1 className="font-serif text-navy-700 text-5xl leading-[1.05]">{title}</h1>
+            </div>
+          </header>
 
-          <div className="surface-card rounded-2xl p-6 md:p-10 border border-slate-800 
-                        [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-amber-400 [&_h2]:mt-8 [&_h2]:mb-3 
-                        [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-amber-300 [&_h3]:mt-6 [&_h3]:mb-2 
-                        [&_p]:text-slate-300 [&_p]:mb-5 [&_p]:leading-relaxed [&_p]:text-sm
-                        [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-5 [&_ul]:space-y-2 [&_ul]:text-sm
-                        [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-5 [&_ol]:space-y-2 [&_ol]:text-sm
-                        [&_li]:text-slate-300 [&_li]:leading-relaxed
-                        [&_a]:text-amber-400 [&_a]:underline [&_a:hover]:text-amber-300
-                        [&_strong]:text-white [&_strong]:font-semibold">
+          <article
+            className="lg:col-span-7 lg:col-start-6 text-ink
+              [&>p:first-child]:font-serif [&>p:first-child]:font-normal [&>p:first-child]:text-2xl [&>p:first-child]:leading-snug [&>p:first-child]:text-ink
+              [&_h2]:font-serif [&_h2]:font-normal [&_h2]:tracking-tight [&_h2]:text-[1.75rem] [&_h2]:text-navy-700 [&_h2]:mt-14 [&_h2]:mb-4 [&_h2]:pt-8 [&_h2]:border-t [&_h2]:border-line
+              [&_h3]:font-serif [&_h3]:font-normal [&_h3]:text-xl [&_h3]:text-ink [&_h3]:mt-8 [&_h3]:mb-3
+              [&_p]:text-muted [&_p]:mb-5 [&_p]:leading-[1.75] [&_p]:text-[1.0625rem]
+              [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-6 [&_ul]:space-y-2.5 [&_ul]:marker:text-amber-700
+              [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-6 [&_ol]:space-y-2.5
+              [&_li]:text-muted [&_li]:leading-[1.7]
+              [&_a]:text-navy-700 [&_a]:underline [&_a]:underline-offset-4 [&_a]:decoration-line [&_a:hover]:decoration-navy-700
+              [&_strong]:text-ink [&_strong]:font-semibold"
+          >
             {children}
-          </div>
+          </article>
         </div>
-      </div>
+      </main>
       <Footer />
     </>
   );

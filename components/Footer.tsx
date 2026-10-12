@@ -1,116 +1,86 @@
-'use client';
-
 import Link from 'next/link';
-import { Instagram, Linkedin, Twitter, Facebook, Youtube, Mail, MapPin } from 'lucide-react';
+import { Wordmark } from './Nav';
 
 const socials = [
-  { icon: Instagram, href: 'https://instagram.com/roundu.in', label: 'Instagram' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/roundu-in-4b4140402/?skipRedirect=true', label: 'LinkedIn' },
-  { icon: Twitter, href: 'https://twitter.com/roundu_in', label: 'Twitter' },
-  { icon: Facebook, href: 'https://facebook.com/roundu.in', label: 'Facebook' },
-  { icon: Youtube, href: 'https://youtube.com/@roundu', label: 'YouTube' },
+  { label: 'Instagram', href: 'https://instagram.com/roundu.in' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/roundu-in-4b4140402/?skipRedirect=true' },
+  { label: 'X / Twitter', href: 'https://twitter.com/roundu_in' },
+  { label: 'Facebook', href: 'https://facebook.com/roundu.in' },
+  { label: 'YouTube', href: 'https://youtube.com/@roundu' },
 ];
 
-const footerLinks = {
-  company: [
-    { label: 'About Us', href: '/about' },
-    { label: 'Contact', href: '/contact' },
-    { label: 'For Providers', href: '/#providers' },
-  ],
-  legal: [
-    { label: 'Terms of Service', href: '/terms' },
-    { label: 'Privacy Policy', href: '/privacy' },
-    { label: 'Refund Policy', href: '/refund' },
-  ],
-};
+const columns = [
+  {
+    title: 'RoundU',
+    links: [
+      { label: 'Services', href: '/services' },
+      { label: 'How it works', href: '/how-it-works' },
+      { label: 'For professionals', href: '/professionals' },
+      { label: 'Early access', href: '/early-access' },
+      { label: 'About', href: '/about' },
+      { label: 'Contact', href: '/contact' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Terms of service', href: '/terms' },
+      { label: 'Privacy policy', href: '/privacy' },
+      { label: 'Refund policy', href: '/refund' },
+    ],
+  },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 border-t border-slate-800/80 pt-16 pb-12 text-slate-400">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-12 gap-12 mb-12">
-
-          {/* Brand Column */}
-          <div className="lg:col-span-6">
-            <Link href="/" className="inline-block mb-4">
-              <span className="text-2xl font-bold tracking-tight text-white">
-                round<span className="text-amber-500">U</span>
-              </span>
+    <footer className="bg-ink text-paper/70">
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-10 pt-20 pb-10">
+        <div className="grid lg:grid-cols-12 gap-14">
+          <div className="lg:col-span-5">
+            <Link href="/" aria-label="RoundU home" className="text-paper">
+              <Wordmark tone="light" className="text-5xl" />
             </Link>
-
-            <p className="text-sm text-slate-400 leading-relaxed mb-6 max-w-sm">
-              The circle of convenience. Hyperlocal verified home services in under 15 minutes across Vellore and Chennai.
+            <p className="mt-6 max-w-sm leading-relaxed">
+              Verified home services, at your door in minutes.
             </p>
+            <a href="mailto:admin@roundu.in" className="link-underline mt-6 inline-block text-paper">
+              admin@roundu.in
+            </a>
+          </div>
 
-            <div className="space-y-2 text-xs text-slate-400 mb-6">
-              <a href="mailto:admin@roundu.in" className="flex items-center gap-2 hover:text-amber-400 transition-colors">
-                <Mail className="w-3.5 h-3.5" />
-                <span>admin@roundu.in</span>
-              </a>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5" />
-                <span>Vellore & Chennai, Tamil Nadu, India</span>
+          <div className="lg:col-span-6 lg:col-start-7 grid grid-cols-2 sm:grid-cols-3 gap-10">
+            {columns.map((col) => (
+              <div key={col.title}>
+                <h4 className="text-xs tracking-[0.14em] uppercase text-paper/45 mb-5">{col.title}</h4>
+                <ul className="space-y-3 text-sm">
+                  {col.links.map((l) => (
+                    <li key={l.href}>
+                      <Link href={l.href} className="link-underline hover:text-paper">
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
-
-            {/* Social Icons */}
-            <div className="flex gap-2">
-              {socials.map((social, i) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={i}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-amber-400 hover:border-amber-500/40 transition-all"
-                  >
-                    <Icon className="w-4 h-4" />
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Links Column */}
-          <div className="lg:col-span-6 grid grid-cols-2 gap-8">
+            ))}
             <div>
-              <h4 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">Company</h4>
-              <ul className="space-y-2.5 text-xs">
-                {footerLinks.company.map((link, i) => (
-                  <li key={i}>
-                    <Link href={link.href} className="hover:text-amber-400 transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">Legal</h4>
-              <ul className="space-y-2.5 text-xs">
-                {footerLinks.legal.map((link, i) => (
-                  <li key={i}>
-                    <Link href={link.href} className="hover:text-amber-400 transition-colors">
-                      {link.label}
-                    </Link>
+              <h4 className="text-xs tracking-[0.14em] uppercase text-paper/45 mb-5">Follow</h4>
+              <ul className="space-y-3 text-sm">
+                {socials.map((s) => (
+                  <li key={s.href}>
+                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="link-underline hover:text-paper">
+                      {s.label}
+                    </a>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} RoundU. Built with care in Tamil Nadu, India.</p>
-          <p className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span>Serving Vellore & Chennai</span>
-          </p>
+        <div className="mt-20 pt-8 border-t border-paper/10 flex flex-col sm:flex-row justify-between gap-3 text-xs text-paper/45">
+          <p>© {new Date().getFullYear()} RoundU Technologies Private Limited</p>
+          <p>Made in Vellore, Tamil Nadu</p>
         </div>
       </div>
     </footer>

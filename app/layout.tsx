@@ -1,5 +1,14 @@
 import type { Metadata } from 'next';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
+
+// One family for the whole site: headings use the heavier weights, body the regular.
+const sans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'RoundU — The Circle of Convenience | Home Services On Demand',
@@ -15,13 +24,13 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     type: 'website',
   },
-  icons: { icon: '/favicon.svg' },
+  icons: { icon: '/brand/roundu-mark-192.png', apple: '/apple-touch-icon.png' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="noise">
+    <html lang="en" className={sans.variable}>
+      <body>
         {children}
       </body>
     </html>

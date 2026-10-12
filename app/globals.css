@@ -3,190 +3,166 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   FONTS & PALETTE — Obsidian Slate + Warm Gold Accent
+   RoundU — editorial palette
+   Warm paper, deep navy ink, burnt amber used sparingly as an accent.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  --font-display: 'Clash Display', 'Inter', system-ui, -apple-system, sans-serif;
-  --font-body: 'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
-
-  /* Premium Obsidian & Warm Slate Palette */
-  --bg-deep: #080C14;
-  --bg-surface: #0F172A;
-  --bg-card: #1E293B;
-  
-  --amber-primary: #F59E0B;
-  --amber-hover: #D97706;
-  --amber-light: #FBBF24;
-  --amber-soft: rgba(245, 158, 11, 0.12);
-  
-  --text-main: #F8FAFC;
-  --text-muted: #94A3B8;
-  --text-subtle: #64748B;
-  
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-amber: rgba(245, 158, 11, 0.25);
+  --paper: #F6F3EE;
+  --sand: #EDE7DD;
+  --line: #DCD4C7;
+  --ink: #0E1B2C;
+  --navy: #152E4B;
+  --muted: #5B6472;
+  --accent: #A95D06;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   BASE STYLES
-   ═══════════════════════════════════════════════════════════════════════════ */
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: var(--bg-deep);
-  color: var(--text-main);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
   overflow-x: hidden;
+  
 }
 
 ::selection {
-  background: var(--amber-primary);
-  color: #000;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-deep);
-}
-
-::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: var(--navy);
+  color: var(--paper);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   SURFACES & CARDS
+   TYPE
    ═══════════════════════════════════════════════════════════════════════════ */
-.surface-card {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-subtle);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.font-serif,
+.font-display {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.035em;
 }
 
-.surface-card:hover {
-  border-color: rgba(245, 158, 11, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 25px rgba(245, 158, 11, 0.08);
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-.surface-glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Ambient Ambient Glow (Subtle & Natural) */
-.ambient-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  pointer-events: none;
-  opacity: 0.15;
-}
-
-.ambient-glow-amber {
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.8) 0%, transparent 70%);
-}
-
-.ambient-glow-blue {
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, transparent 70%);
-}
-
-/* Grid overlay background */
-.bg-grid-pattern {
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 48px 48px;
+.tabular {
+  font-variant-numeric: tabular-nums lining-nums;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   BUTTONS & BADGES
+   BUTTONS
    ═══════════════════════════════════════════════════════════════════════════ */
-.btn-amber {
-  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-  color: #000;
-  font-weight: 700;
-  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.25);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: var(--navy);
+  color: var(--paper);
+  font-weight: 500;
+  border-radius: 4px;
+  transition: background-color 0.3s var(--ease);
 }
 
-.btn-amber:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4);
+.btn-primary:hover {
+  background: var(--ink);
 }
 
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  color: #F8FAFC;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.btn-primary:focus-visible,
+.btn-ghost:focus-visible,
+.link-underline:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-}
-
-.badge-pill {
+.btn-ghost {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.375rem 0.875rem;
-  border-radius: 9999px;
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid rgba(245, 158, 11, 0.25);
-  color: #FBBF24;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.025em;
+  color: var(--ink);
+  font-weight: 500;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.btn-ghost:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s var(--ease);
+}
+
+.link-underline:hover {
+  background-size: 100% 1px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   MARQUEE
+   FORMS
    ═══════════════════════════════════════════════════════════════════════════ */
-.marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 35s linear infinite;
+.field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  color: var(--ink);
+  border-radius: 0;
+  transition: border-color 0.3s var(--ease);
 }
 
-.marquee-reverse {
-  display: flex;
-  width: max-content;
-  animation: marquee-reverse 40s linear infinite;
+.field::placeholder {
+  color: #A39C91;
 }
 
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - 1.5rem)); }
+.field:focus {
+  outline: none;
+  border-color: var(--navy);
 }
 
-@keyframes marquee-reverse {
-  0% { transform: translateX(calc(-50% - 1.5rem)); }
-  100% { transform: translateX(0); }
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-/* Smooth gradient mask for marquee edges */
-.marquee-mask {
-  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+/* Van marker on the in-app tracking map */
+.route-van {
+  offset-path: path('M 0 462 L 132 462 L 132 264 L 264 264 L 264 132');
+  offset-rotate: 0deg;
+  offset-anchor: center;
+  animation: route-van 7s cubic-bezier(0.45, 0.05, 0.4, 1) infinite;
 }
+@keyframes route-van {
+  0% { offset-distance: 0%; opacity: 0; }
+  6% { opacity: 1; }
+  80% { offset-distance: 100%; opacity: 1; }
+  100% { offset-distance: 100%; opacity: 1; }
+}
+
+/* Emphasis in headings is carried by colour, not italics. */
+em { font-style: normal; }

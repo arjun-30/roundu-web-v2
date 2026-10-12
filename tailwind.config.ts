@@ -8,6 +8,11 @@ const config: Config = {
         // ── BRAND PALETTE ──
         ink: '#030916',           // text — deep almost-black
         bg: '#EEF2F7',            // background — soft cool white
+        // ── EDITORIAL SURFACES (marketing site) ──
+        paper: '#F6F3EE',         // warm off-white page
+        sand: '#EDE7DD',          // secondary surface
+        line: '#DCD4C7',          // hairline rules
+        muted: '#5B6472',         // secondary text on paper
         navy: {
           50: '#E7EBF1',
           100: '#C3CCDB',
@@ -36,8 +41,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['var(--font-clash)', 'system-ui', 'sans-serif'],
-        sans: ['var(--font-satoshi)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-jetbrains)', 'monospace'],
       },
       fontSize: {
