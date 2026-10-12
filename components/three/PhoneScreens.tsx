@@ -193,3 +193,35 @@ export const appScreens = [
   appShot('/app-screens/match.webp', 'RoundU app finding a nearby plumber'),
   appShot('/app-screens/arrive.webp', 'RoundU app tracking the professional on a live map'),
 ];
+
+/* Short screen recordings of the real app, one per step, played inside the phone. */
+export const appClips = [
+  { src: '/app-screens/ask.mp4', poster: '/app-screens/ask.webp', alt: 'RoundU app home: what needs fixing today?' },
+  { src: '/app-screens/match.mp4', poster: '/app-screens/match.webp', alt: 'RoundU app searching nearby professionals on a live map' },
+  { src: '/app-screens/arrive.mp4', poster: '/app-screens/arrive.webp', alt: 'RoundU app tracking the professional to your door' },
+];
+
+export function PhoneClip({ index }: { index: number }) {
+  const c = appClips[index];
+  return (
+    <div className="h-full w-full bg-paper">
+      <div className="h-[40px] overflow-hidden">
+        <StatusBar />
+      </div>
+      <video
+        key={c.src}
+        poster={c.poster}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-label={c.alt}
+        className="block h-[662px] w-full object-cover object-top"
+      >
+        <source src={c.src} type="video/mp4" />
+        <source src={c.src.replace('.mp4', '.webm')} type="video/webm" />
+      </video>
+    </div>
+  );
+}

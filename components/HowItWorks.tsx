@@ -11,7 +11,7 @@ import {
   type MotionValue,
 } from 'framer-motion';
 import { BadgeCheck, CheckCircle2, Clock, Droplets, KeyRound, Star } from 'lucide-react';
-import { appScreens as screens, SCREEN_W, SCREEN_H } from './three/PhoneScreens';
+import { PhoneClip, SCREEN_W, SCREEN_H } from './three/PhoneScreens';
 
 const steps = [
   { word: 'Ask', title: 'Tell us what broke.', body: 'One line and a trade. No calls.' },
@@ -53,9 +53,6 @@ function usePhoneScale() {
 }
 
 function Phone({ progress, step, scale }: { progress: MotionValue<number>; step: number; scale: number }) {
-  // Screens hold while you read, then slide together like a real scroll.
-  const strip = useTransform(progress, [0, 0.26, 0.4, 0.6, 0.74, 1], [0, 0, -1, -1, -2, -2]);
-  const y = useTransform(strip, (v) => v * SCREEN_H);
   const rotateY = useTransform(progress, [0, 0.5, 1], [-22, 0, 18]);
   const rotateX = useTransform(progress, [0, 0.5, 1], [12, 4, 10]);
   const rotateZ = useTransform(progress, [0, 1], [-4, 3]);
@@ -73,13 +70,21 @@ function Phone({ progress, step, scale }: { progress: MotionValue<number>; step:
         <div className="h-full w-full bg-[#040507] p-[10px]" style={{ borderRadius: 56 * scale + 6 }}>
           <div className="relative h-full w-full overflow-hidden bg-black" style={{ borderRadius: 48 * scale }}>
             <div className="absolute left-0 top-0" style={{ width: SCREEN_W, transform: `scale(${scale})`, transformOrigin: 'top left' }}>
-              <motion.div style={{ y }}>
-                {screens.map((Screen, i) => (
-                  <div key={i} style={{ width: SCREEN_W, height: SCREEN_H }}>
-                    <Screen />
-                  </div>
-                ))}
-              </motion.div>
+              {/* each step plays its own app recording; steps cross-fade like a cut in a video */}
+              <div className="relative" style={{ width: SCREEN_W, height: SCREEN_H }}>
+                <AnimatePresence initial={false}>
+                  <motion.div
+                    key={step}
+                    className="absolute inset-0"
+                    initial={{ opacity: 0, y: 36, scale: 1.04, filter: 'blur(8px)' }}
+                    animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -24, scale: 0.97, filter: 'blur(8px)' }}
+                    transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <PhoneClip index={step} />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0.04)_28%,rgba(255,255,255,0)_45%)]" />
           </div>
