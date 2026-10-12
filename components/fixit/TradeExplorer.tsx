@@ -2,10 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import { fixitCss, type TradeKey } from './FixItScene';
 
+const TradeScene3D = dynamic(() => import('./TradeScene3D'), { ssr: false });
+
 export const trades: { key: TradeKey; name: string; job: string; pro: string; time: string }[] = [
-  { key: 'plumbing', name: 'Plumbing', job: 'Repairing the water pump', pro: 'Karthik', time: '12 min' },
+  { key: 'plumbing', name: 'Plumbing', job: 'Fixing a leaking tap', pro: 'Karthik', time: '12 min' },
   { key: 'electrical', name: 'Electrical', job: 'Replacing a light fitting', pro: 'Suresh', time: '9 min' },
   { key: 'cleaning', name: 'Cleaning', job: 'Cleaning the windows', pro: 'Priya', time: '14 min' },
   { key: 'painting', name: 'Painting', job: 'Repainting a wall', pro: 'Arun', time: '11 min' },
@@ -54,24 +57,15 @@ export function ScenePanel({ index }: { index: number }) {
         <div className="overflow-hidden rounded-[20px]">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
-              key={t.key}
+              key="stage"
               initial={{ opacity: 0, scale: 1.03 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* real photo, slowly drifting in like a live camera */}
-              <div className="relative aspect-[6/5] overflow-hidden">
-                <motion.img
-                  src={`/scenes/${t.key}.webp`}
-                  alt={`${t.pro}, a RoundU professional, ${t.job.toLowerCase()}`}
-                  className="absolute inset-0 h-full w-full object-cover"
-                  initial={{ scale: 1.02 }}
-                  animate={reduce ? { scale: 1.02 } : { scale: 1.1, x: -8, y: -6 }}
-                  transition={{ duration: CYCLE_MS / 1000 + 1, ease: 'linear' }}
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-ink/10" />
-                <span className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium text-ink backdrop-blur">
+              <div className="relative aspect-[6/5] overflow-hidden bg-[#EDE7DD]">
+                <TradeScene3D trade={t.key} />
+                <span className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium text-ink backdrop-blur">
                   <span className="relative flex h-2 w-2">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3F8F4E] opacity-60" />
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-[#3F8F4E]" />
