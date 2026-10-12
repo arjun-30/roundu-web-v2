@@ -137,12 +137,12 @@ function TrackScreen() {
         <rect x="75" y="141" width="48" height="48" rx="6" fill="#C9D3BD" />
         <rect x="207" y="339" width="48" height="114" rx="6" fill="#C9D3BD" />
         <path d="M 0 462 L 132 462 L 132 264 L 264 264 L 264 132" fill="none" stroke="#152E4B" strokeOpacity="0.18" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M 0 462 L 132 462 L 132 330" fill="none" stroke="#C2700B" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M 0 462 L 132 462 L 132 330" fill="none" stroke="#FC7508" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
         <circle cx="264" cy="132" r="9" fill="#152E4B" stroke="#fff" strokeWidth="3" />
       </svg>
       {/* Moving van marker along the route */}
       <span
-        className="route-van absolute left-0 top-0 h-[18px] w-[18px] rounded-full border-[3px] border-white bg-[#C2700B] shadow-[0_4px_10px_rgba(14,27,44,0.35)]"
+        className="route-van absolute left-0 top-0 h-[18px] w-[18px] rounded-full border-[3px] border-white bg-[#FC7508] shadow-[0_4px_10px_rgba(14,27,44,0.35)]"
         aria-hidden
       />
       <div className="relative mt-auto m-3 rounded-[22px] bg-white p-5 shadow-[0_-10px_40px_-12px_rgba(14,27,44,0.3)]">
@@ -172,3 +172,24 @@ function TrackScreen() {
 }
 
 export const screens = [RequestScreen, MatchScreen, TrackScreen];
+
+/* Real screenshots from the RoundU app (Ask → Match → Arrive), under a phone status bar. */
+function appShot(src: string, alt: string) {
+  function AppShot() {
+    return (
+      <div className="h-full w-full bg-paper">
+        <div className="h-[40px] overflow-hidden">
+          <StatusBar />
+        </div>
+        <img src={src} alt={alt} width={SCREEN_W} height={SCREEN_H - 40} className="block h-[662px] w-full object-cover object-top" />
+      </div>
+    );
+  }
+  return AppShot;
+}
+
+export const appScreens = [
+  appShot('/app-screens/ask.webp', 'RoundU app home: what needs fixing today?'),
+  appShot('/app-screens/match.webp', 'RoundU app finding a nearby plumber'),
+  appShot('/app-screens/arrive.webp', 'RoundU app tracking the professional on a live map'),
+];

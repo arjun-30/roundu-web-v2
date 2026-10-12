@@ -11,7 +11,7 @@ import {
   type MotionValue,
 } from 'framer-motion';
 import { BadgeCheck, CheckCircle2, Clock, Droplets, KeyRound, Star } from 'lucide-react';
-import { screens, SCREEN_W, SCREEN_H } from './three/PhoneScreens';
+import { appScreens as screens, SCREEN_W, SCREEN_H } from './three/PhoneScreens';
 
 const steps = [
   { word: 'Ask', title: 'Tell us what broke.', body: 'One line and a trade. No calls.' },

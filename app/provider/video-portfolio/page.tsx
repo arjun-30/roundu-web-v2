@@ -25,7 +25,7 @@ const colors = {
   primaryText: '#030916',
   background: '#EEF2F7',
   brand: '#152E4B',
-  secondary: '#A95D06',
+  secondary: '#E8690A',
   accent: '#F59E0B',
   surface: '#FFFFFF',
   gray100: '#F3F4F6',
@@ -295,7 +295,7 @@ export default function VideoPortfolioScreen() {
 
         {/* ═══ SECTION 2: BEFORE/AFTER PHOTOS ═══ */}
         <div className="flex items-center gap-3 mb-3.5 mt-8">
-          <div className="w-8 h-8 rounded-xl bg-[#A95D06] flex items-center justify-center">
+          <div className="w-8 h-8 rounded-xl bg-[#E8690A] flex items-center justify-center">
             <ImagePlus size={14} color={colors.surface} />
           </div>
           <div>

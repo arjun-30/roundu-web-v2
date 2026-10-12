@@ -17,7 +17,7 @@ const ROAD = '#E0D8CB';
 const PAD = '#ECE6DC';
 const SAGE = '#C9D3BD';
 const NAVY = '#152E4B';
-const AMBER = '#C2700B';
+const AMBER = '#FC7508';
 
 const PITCH = 3.2; // block + street
 const BLOCK = 2.4;

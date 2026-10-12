@@ -27,17 +27,17 @@ const config: Config = {
           950: '#030916',
         },
         amber: {
-          50: '#FEF6E7',
-          100: '#FDE9C2',
-          200: '#FBD68A',
-          300: '#FAC355',
-          400: '#F8B028',
-          500: '#F59E0B',         // accent — bright amber
-          600: '#D68609',
-          700: '#A95D06',         // secondary — burnt orange
-          800: '#7A4205',
-          900: '#522C03',
-          950: '#2B1601',
+          50: '#FFF3E8',
+          100: '#FFE2C8',
+          200: '#FEC594',
+          300: '#FDA65C',
+          400: '#FD8C2E',
+          500: '#FC7508',         // logo orange
+          600: '#E8690A',
+          700: '#FC7508',         // accent — logo orange
+          800: '#B54F07',
+          900: '#5E2A04',
+          950: '#2E1502',
         },
       },
       fontFamily: {

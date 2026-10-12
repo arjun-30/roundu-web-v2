@@ -20,7 +20,7 @@ const colors = {
   primaryText: '#030916',
   background: '#EEF2F7',
   brand: '#152E4B',
-  secondary: '#A95D06',
+  secondary: '#E8690A',
   accent: '#F59E0B',
   surface: '#FFFFFF',
   gray100: '#F3F4F6',
