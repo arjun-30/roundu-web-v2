@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Environment, Lightformer, RoundedBox, SoftShadows } from '@react-three/drei';
+import { Environment, Lightformer, RoundedBox } from '@react-three/drei';
 import * as THREE from 'three';
 import type { TradeKey } from './FixItScene';
 
@@ -224,7 +224,7 @@ function Plumbing() {
     if (wrench.current) {
       const visible = t < WORK + 0.04;
       wrench.current.visible = visible;
-      wrench.current.rotation.y = working ? Math.sin(t * 34) * 0.45 - 0.3 : -0.3;
+      wrench.current.rotation.y = working ? Math.sin(t * 28) * 0.7 - 0.2 : -0.2;
       wrench.current.position.y = 0.06 + (working ? 0 : (t - WORK) * 2);
     }
     drops.current.forEach((d, i) => {
@@ -436,7 +436,7 @@ function Electrical() {
           </mesh>
           <mesh position={[0, -0.1, 0]}>
             <sphereGeometry args={[0.06, 40, 40]} />
-            <meshPhysicalMaterial color="#FFF8EC" roughness={0.02} transmission={0.9} thickness={0.01} transparent opacity={0.6} />
+            <meshPhysicalMaterial color="#FFF8EC" roughness={0.02} transparent opacity={0.6} />
           </mesh>
           <mesh position={[0, -0.1, 0]} rotation={[Math.PI / 2, 0, 0]}>
             <torusGeometry args={[0.022, 0.0025, 8, 32]} />
@@ -447,7 +447,7 @@ function Electrical() {
           <planeGeometry args={[0.45, 0.45]} />
           <meshBasicMaterial map={haloTex} transparent opacity={0} depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
         </mesh>
-        <pointLight ref={light} position={[0, -0.12, 0.02]} color="#FFC37A" intensity={0} distance={4} decay={1.6} castShadow shadow-mapSize={[512, 512]} />
+        <pointLight ref={light} position={[0, -0.12, 0.02]} color="#FFC37A" intensity={0} distance={4} decay={1.6} />
         <mesh ref={glow} position={[0, -0.9, 0]}>
           <coneGeometry args={[0.85, 1.7, 48, 1, true]} />
           <meshBasicMaterial color="#FFD9A0" transparent opacity={0} depthWrite={false} side={THREE.DoubleSide} blending={THREE.AdditiveBlending} />
@@ -663,13 +663,13 @@ function Cleaning() {
         {[[-0.06, 0.04], [0.05, -0.05], [0.02, 0.07]].map(([x, z], i) => (
           <mesh key={i} position={[x, 0.3, z]} castShadow>
             <sphereGeometry args={[0.035, 20, 20]} />
-            <meshPhysicalMaterial color="#ffffff" roughness={0.05} transmission={0.6} transparent opacity={0.8} />
+            <meshPhysicalMaterial color="#ffffff" roughness={0.05} transparent opacity={0.8} />
           </mesh>
         ))}
       </group>
       <group position={[0.62, hole.b + 0.0, 0.08]}>
         <RoundedBox args={[0.08, 0.2, 0.06]} radius={0.02} position={[0, 0.1, 0]} castShadow>
-          <meshPhysicalMaterial color="#DDEAF0" roughness={0.1} transmission={0.4} transparent opacity={0.9} />
+          <meshPhysicalMaterial color="#DDEAF0" roughness={0.1} transparent opacity={0.9} />
         </RoundedBox>
         <RoundedBox args={[0.04, 0.06, 0.08]} radius={0.01} position={[0, 0.23, 0.01]} castShadow>
           <meshStandardMaterial color={NAVY} roughness={0.5} />
@@ -1077,12 +1077,12 @@ function Carpentry() {
 /* ── Camera + stage ──────────────────────────────────────────────────────── */
 
 const shots: Record<TradeKey, { pos: [number, number, number]; target: [number, number, number] }> = {
-  plumbing: { pos: [0.75, 1.75, 2.15], target: [0, 1.08, 0.28] },
-  electrical: { pos: [0.8, 1.55, 3.7], target: [0, 1.55, 0.4] },
+  plumbing: { pos: [0.55, 1.5, 1.45], target: [0, 1.15, 0.2] },
+  electrical: { pos: [0.55, 1.75, 2.5], target: [0, 1.65, 0.5] },
   cleaning: { pos: [0.65, 1.55, 3.3], target: [0, 1.5, 0] },
   painting: { pos: [1.2, 1.35, 4.2], target: [0, 1.25, 0.2] },
-  ac: { pos: [1.0, 1.6, 3.5], target: [0, 1.75, 0.3] },
-  carpentry: { pos: [0.9, 1.6, 3.2], target: [0, 1.4, 0.2] },
+  ac: { pos: [0.8, 1.85, 2.6], target: [0, 1.95, 0.3] },
+  carpentry: { pos: [1.0, 1.6, 2.3], target: [0.25, 1.4, 0.2] },
 };
 
 function Rig({ trade }: { trade: TradeKey }) {
@@ -1124,14 +1124,13 @@ export default function TradeScene3D({ trade }: { trade: TradeKey }) {
   return (
     <div ref={wrap} className="absolute inset-0">
     <Canvas
-      shadows
-      dpr={[1, 1.5]}
+      shadows="soft"
+      dpr={[1, 1.25]}
       frameloop={visible ? 'always' : 'never'}
       camera={{ fov: 34, near: 0.05, far: 40, position: shots[trade].pos }}
       gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.0 }}
       style={{ background: '#EDE7DD' }}
     >
-      <SoftShadows size={18} samples={12} focus={0.6} />
       <hemisphereLight args={['#FFF6EA', '#B9A891', 0.35]} />
       <directionalLight
         position={[3.5, 5, 4]}
