@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const links = [
+  { label: 'Home', href: '/' },
   { label: 'How it works', href: '/how-it-works' },
   { label: 'For professionals', href: '/professionals' },
   { label: 'About', href: '/about' },
@@ -83,13 +84,6 @@ export default function Nav() {
                   />
                 )}
                 {l.label}
-                {active && (
-                  <motion.span
-                    layoutId="nav-dot"
-                    className="absolute bottom-[3px] left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-amber-500"
-                    transition={{ type: 'spring', stiffness: 400, damping: 34 }}
-                  />
-                )}
               </Link>
             );
           })}
@@ -138,7 +132,7 @@ export default function Nav() {
             className="mx-auto mt-2 max-h-[calc(100svh-88px)] overflow-y-auto rounded-[28px] bg-navy-900/95 p-3 ring-1 ring-white/10 shadow-[0_18px_40px_-18px_rgba(21,46,75,0.6)] backdrop-blur-xl md:hidden"
           >
             <ul>
-              {[{ label: 'Home', href: '/' }, ...links, { label: 'Contact', href: '/contact' }].map((l, i) => {
+              {[...links,{ label: 'Contact', href: '/contact' }].map((l, i) => {
                 const active = pathname === l.href;
                 return (
                   <motion.li
@@ -153,9 +147,7 @@ export default function Nav() {
                         active ? 'bg-white/10 text-white' : 'text-white/70'
                       }`}
                     >
-                      {l.label}
-                      {active && <span className="h-2 w-2 rounded-full bg-amber-500" />}
-                    </Link>
+                      {l.label}                    </Link>
                   </motion.li>
                 );
               })}
