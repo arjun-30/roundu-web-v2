@@ -14,6 +14,14 @@ const values = [
   { title: 'Fair', body: 'Clear prices for you, a fair share for them.' },
 ];
 
+const founderNote = [
+  'I started RoundU with a simple thought: technology should make everyday life easier, not more complicated.',
+  'Finding the right service professional can often be time-consuming and uncertain. At the same time, many local service providers have the skills to deliver great work but lack the digital tools to reach more customers.',
+  'I saw an opportunity to bring these two sides together through a single platform.',
+  'My vision for RoundU goes beyond building an app. I want to build a technology-driven ecosystem that makes local services easier to access, helps service professionals grow, and creates a more connected experience for everyone.',
+  'As a founder, I believe in starting small, learning continuously, and building for the long term. There is a lot to accomplish, and RoundU is only the beginning.',
+];
+
 export default function AboutPage() {
   return (
     <main>
@@ -47,6 +55,31 @@ export default function AboutPage() {
               <p className="mt-3 text-muted">{v.body}</p>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1280px] px-6 pb-24 lg:px-10 lg:pb-32">
+        <div className="grid gap-10 border-t border-line pt-14 lg:grid-cols-12">
+          <Reveal className="lg:col-span-4">
+            <p className="eyebrow mb-5">A note from the founder</p>
+            <h2 className="font-serif text-4xl leading-[1.05] text-navy-700 sm:text-5xl">
+              Technology should make life <em className="text-navy-300">easier.</em>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
+            <div className="space-y-5 text-lg leading-relaxed text-muted">
+              {founderNote.map((para) => (
+                <p key={para.slice(0, 24)}>{para}</p>
+              ))}
+            </div>
+            <p className="mt-10 border-l-2 border-amber-500 pl-5 font-serif text-2xl leading-snug text-navy-700 sm:text-[1.7rem]">
+              We&rsquo;re building RoundU one step at a time, with a clear vision of where we want to go.
+            </p>
+            <div className="mt-10">
+              <p className="text-lg font-semibold text-ink">Arjun Ramesh</p>
+              <p className="text-muted">Founder, RoundU</p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
