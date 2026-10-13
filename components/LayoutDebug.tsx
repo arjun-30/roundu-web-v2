@@ -16,7 +16,7 @@ export default function LayoutDebug() {
         const b = el.getBoundingClientRect();
         return `${Math.round(b.left)}–${Math.round(b.right)} (w ${Math.round(b.width)})`;
       };
-      const wide = [...document.querySelectorAll('body *')]
+      const wide = Array.from(document.querySelectorAll('body *'))
         .filter((el) => {
           const b = el.getBoundingClientRect();
           return b.width > vw + 2 || b.left < -2;
