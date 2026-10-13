@@ -6,11 +6,11 @@ import { CtaBand, PageHeader, PrimaryLink } from '@/components/ui';
 
 export const metadata = {
   title: 'For professionals · RoundU',
-  description: 'Keep 90% of every job, get paid daily, and find work in your own neighbourhood.',
+  description: 'Keep 82% of every job, get paid daily, and find work in your own neighbourhood.',
 };
 
 const terms = [
-  { figure: '90%', label: 'of every booking is yours' },
+  { figure: '82%', label: 'of every booking is yours' },
   { figure: 'Daily', label: 'payouts to your bank' },
   { figure: '₹0', label: 'lead fees or subscriptions' },
 ];

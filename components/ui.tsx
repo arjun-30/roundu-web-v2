@@ -34,14 +34,28 @@ export function Magnetic({ children, strength = 0.3 }: { children: React.ReactNo
   );
 }
 
-export function PrimaryLink({ href, children, light = false }: { href: string; children: React.ReactNode; light?: boolean }) {
+export function PrimaryLink({
+  href,
+  children,
+  light = false,
+  variant,
+}: {
+  href: string;
+  children: React.ReactNode;
+  light?: boolean;
+  variant?: 'shine';
+}) {
+  const tone =
+    variant === 'shine'
+      ? 'btn-shine font-semibold'
+      : light
+        ? 'bg-white text-jet hover:bg-amber-500 hover:text-white'
+        : 'bg-jet text-white hover:bg-amber-600';
   return (
     <Magnetic>
       <Link
         href={href}
-        className={`group inline-flex h-[52px] items-center gap-3 rounded-full px-7 text-[0.95rem] font-medium transition-colors ${
-          light ? 'bg-white text-jet hover:bg-amber-500 hover:text-white' : 'bg-jet text-white hover:bg-amber-600'
-        }`}
+        className={`group inline-flex h-[52px] items-center gap-3 rounded-full px-7 text-[0.95rem] font-medium transition-colors ${tone}`}
       >
         {children}
         <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.75} />
@@ -86,8 +100,8 @@ export function PageHeader({ label, title, lead }: { label: string; title: React
 
 /** Closing call to action used at the bottom of pages. */
 export function CtaBand({
-  title = 'Opening soon in Vellore & Chennai.',
-  action = 'Get early access',
+  title = 'Launching soon in Coimbatore.',
+  action = 'Join waitlist',
   href = '/early-access',
 }: {
   title?: string;
@@ -106,7 +120,7 @@ export function CtaBand({
         <div className="pointer-events-none absolute -right-24 -top-24 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(233,162,74,0.22),rgba(233,162,74,0)_70%)]" />
         <div className="relative mx-auto flex max-w-[1180px] flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
           <h2 className="max-w-2xl font-serif text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">{title}</h2>
-          <PrimaryLink href={href} light>
+          <PrimaryLink href={href} light variant={href.startsWith('/early-access') ? 'shine' : undefined}>
             {action}
           </PrimaryLink>
         </div>

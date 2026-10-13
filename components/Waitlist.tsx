@@ -100,7 +100,7 @@ export default function Waitlist() {
               Be first through <em className="text-navy-300">the door.</em>
             </h1>
             <p className="mt-6 mb-12 text-lg leading-relaxed text-muted max-w-md">
-              Opening in Vellore and Chennai first.
+              Launching in Coimbatore first.
             </p>
           </Reveal>
 
@@ -195,7 +195,7 @@ export default function Waitlist() {
                       autoComplete="address-level2"
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
-                      placeholder="Vellore"
+                      placeholder="Coimbatore"
                       className="field"
                     />
                   </label>

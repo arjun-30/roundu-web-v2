@@ -4,7 +4,7 @@ import Waitlist from '@/components/Waitlist';
 
 export const metadata = {
   title: 'Early access · RoundU',
-  description: 'Join the RoundU waitlist for Vellore and Chennai.',
+  description: 'Join the RoundU waitlist for Coimbatore.',
 };
 
 export default function EarlyAccessPage() {

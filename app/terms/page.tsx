@@ -49,7 +49,7 @@ export default function TermsPage() {
                 Providers may quote a price after assessing the work in person. You can
                 approve or decline the quote. Payments are processed securely through
                 Stripe and held until the service is completed. RoundU charges a platform
-                fee of 10% on every completed booking.
+                fee of 18% on every completed booking.
             </p>
 
               <p className="text-bg/70 leading-relaxed">

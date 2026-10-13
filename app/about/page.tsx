@@ -35,7 +35,7 @@ export default function AboutPage() {
           </p>
         </Reveal>
         <Reveal delay={0.1} className="text-lg leading-relaxed text-muted lg:col-span-4 lg:col-start-9 lg:pt-2">
-          We&rsquo;re a small team in Vellore. We open in Vellore and Chennai first, then the rest of Tamil Nadu.
+          We&rsquo;re a small team in Vellore. We open in Coimbatore first, then the rest of Tamil Nadu.
         </Reveal>
       </section>
 

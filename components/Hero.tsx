@@ -23,7 +23,7 @@ export default function Hero() {
     <section className="relative h-[100svh] min-h-[820px] lg:min-h-[760px] overflow-hidden">
       {/* 3D stage */}
       <div
-        className={`absolute inset-0 top-[60%] lg:top-0 lg:left-[22%] transition-opacity duration-[1400ms] ${
+        className={`absolute inset-0 top-[60%] lg:top-0 transition-opacity duration-[1400ms] ${
           ready ? 'opacity-100' : 'opacity-0'
         }`}
         aria-hidden
@@ -32,14 +32,14 @@ export default function Hero() {
       </div>
 
       {/* Readability scrims — fade the scene into the page behind the copy */}
-      <div className="pointer-events-none absolute inset-0 hidden lg:block bg-[linear-gradient(90deg,#F6F3EE_0%,#F6F3EE_30%,rgba(246,243,238,0.85)_42%,rgba(246,243,238,0)_62%)]" />
+      <div className="pointer-events-none absolute inset-0 hidden lg:block bg-[linear-gradient(90deg,rgba(246,243,238,0.9)_0%,rgba(246,243,238,0.86)_34%,rgba(246,243,238,0.6)_46%,rgba(246,243,238,0)_64%)]" />
       <div className="pointer-events-none absolute inset-x-0 top-[60%] h-24 lg:hidden bg-gradient-to-b from-paper to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 lg:h-56 bg-gradient-to-t from-paper via-paper/70 to-transparent" />
 
       <div className="relative z-10 mx-auto flex h-full max-w-[1280px] flex-col px-6 pt-[118px] lg:px-10 lg:pt-0 lg:justify-center pointer-events-none">
         <div className="max-w-[40rem] pointer-events-auto">
           <motion.p {...rise(0)} className="eyebrow mb-8 lg:mb-10">
-            Vellore &amp; Chennai · Opening 2026
+            Coimbatore · Launching 2026
           </motion.p>
 
           <motion.h1
@@ -54,7 +54,7 @@ export default function Hero() {
           </motion.p>
 
           <motion.div {...rise(0.28)} className="mt-8 lg:mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-            <PrimaryLink href="/early-access">Get early access</PrimaryLink>
+            <PrimaryLink href="/early-access" variant="shine">Join waitlist</PrimaryLink>
             <Link href="/professionals" className="btn-ghost text-[0.95rem]">
               I&rsquo;m a professional
             </Link>

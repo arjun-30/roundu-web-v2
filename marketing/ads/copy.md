@@ -12,12 +12,12 @@ Seven creatives for Meta (Instagram + Facebook). The source is `ads.html`, and f
 | 6 | `story-track.mp4` | Reels/Stories 9:16, 11s | Homeowners and renters |
 | 7 | `story-pro.mp4` | Reels/Stories 9:16, 11s | Service professionals |
 
-Geo for all ads: Vellore + Chennai. The landing page for customer ads is `roundu.in/#waitlist`; for pro ads it is `roundu.in/#providers`.
+Geo for all ads: Coimbatore. The landing page for customer ads is `roundu.in/#waitlist`; for pro ads it is `roundu.in/#providers`.
 
 ---
 
 ### 1 · Leaking tap at 8 pm
-- **Primary text:** The tap always gives up after the plumber's gone home. RoundU matches you with a verified plumber from your own neighbourhood, at your door in about fifteen minutes. Launching in Vellore & Chennai. Reserve early access.
+- **Primary text:** The tap always gives up after the plumber's gone home. RoundU matches you with a verified plumber from your own neighbourhood, at your door in about fifteen minutes. Launching in Coimbatore. Reserve early access.
 - **Headline:** A verified plumber in 15 minutes
 - **Description:** Upfront prices. Pay after the job.
 - **CTA button:** Sign up
@@ -31,12 +31,12 @@ Geo for all ads: Vellore + Chennai. The landing page for customer ads is `roundu
 ### 3 · The price you see is the price you pay
 - **Primary text:** No "we'll see once I get there." RoundU shows the visit charge and the estimate before you book, and you pay only after the job is done.
 - **Headline:** Upfront prices. Zero surprises.
-- **Description:** Home services in Vellore & Chennai
+- **Description:** Home services in Coimbatore
 - **CTA button:** Learn more
 
 ### 4 · For professionals
-- **Primary text:** Electricians, plumbers, cleaners, mechanics: get jobs from your own area without paying for leads. You keep 90% of every booking, and payouts land in your bank the same evening.
-- **Headline:** Keep 90% of every job
+- **Primary text:** Electricians, plumbers, cleaners, mechanics: get jobs from your own area without paying for leads. You keep 82% of every booking, and payouts land in your bank the same evening.
+- **Headline:** Keep 82% of every job
 - **Description:** Free to join. DigiLocker-verified badge.
 - **CTA button:** Apply now
 
@@ -51,7 +51,7 @@ Geo for all ads: Vellore + Chennai. The landing page for customer ads is `roundu
 - **CTA button:** Sign up
 
 ### 7 · For professionals (video)
-- **Primary text:** You do the work. We bring the jobs from your neighbourhood. 90% of every booking is yours, with daily payouts.
+- **Primary text:** You do the work. We bring the jobs from your neighbourhood. 82% of every booking is yours, with daily payouts.
 - **Headline:** Partner with RoundU
 - **CTA button:** Apply now
 

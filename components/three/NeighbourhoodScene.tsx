@@ -306,6 +306,18 @@ function Rig() {
   );
   const pointer = useRef({ x: 0, y: 0 });
 
+  // On desktop the canvas spans the full width, but the composition should sit where it did when
+  // the canvas started 22% in — so push the view right by half that, and the left fills with city.
+  useLayoutEffect(() => {
+    const cam = camera as THREE.PerspectiveCamera;
+    if (!portrait && size.width >= 1024) {
+      cam.setViewOffset(size.width, size.height, -size.width * 0.11, 0, size.width, size.height);
+    } else {
+      cam.clearViewOffset();
+    }
+    cam.updateProjectionMatrix();
+  }, [camera, size.width, size.height, portrait]);
+
   useLayoutEffect(() => {
     const onMove = (e: PointerEvent) => {
       pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;

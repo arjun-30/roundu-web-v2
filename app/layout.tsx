@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
+import LayoutDebug from '@/components/LayoutDebug';
 
 // One family for the whole site: headings use the heavier weights, body the regular.
 const sans = Plus_Jakarta_Sans({
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={sans.variable}>
       <body>
         {children}
+        <LayoutDebug />
       </body>
     </html>
   );

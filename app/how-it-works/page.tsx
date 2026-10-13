@@ -21,7 +21,7 @@ const faqs = [
   { q: 'How fast can someone arrive?', a: 'We aim to match you with a nearby professional within fifteen minutes of booking.' },
   { q: 'When do I pay?', a: 'Only after the job is done. The price is shown before you confirm.' },
   { q: 'How are professionals checked?', a: 'Identity is verified through DigiLocker and every pro is onboarded in person.' },
-  { q: 'Where is RoundU available?', a: 'We open first in Vellore and Chennai.' },
+  { q: 'Where is RoundU available?', a: 'We open first in Coimbatore.' },
 ];
 
 export default function HowItWorksPage() {
